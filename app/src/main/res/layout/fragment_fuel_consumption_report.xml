@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="fuelConsumptionReport"
+            type="org.digital.tracking.model.FuelConsumptionReport" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".view.fragments.FuelConsumptionReportFragment">
+
+        <include layout="@layout/layout_toolbar" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/layout_divider_8dp"
+            android:gravity="center"
+            android:minHeight="@dimen/margin_48dp"
+            android:padding="@dimen/margin_8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/vehicle"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/distance_unit_km"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <include layout="@layout/view_divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/layout_divider_8dp"
+            android:gravity="center"
+            android:minHeight="@dimen/margin_48dp"
+            android:padding="@dimen/margin_8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{fuelConsumptionReport.vehicleNumber}"
+                tools:text="@string/placeholder_vehicle_number" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@{fuelConsumptionReport.totalKm}"
+                tools:text="@string/placeholder_distance_km" />
+        </LinearLayout>
+
+        <include layout="@layout/view_divider" />
+
+        <TextView
+            style="@style/HeadingLargeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:minHeight="@dimen/margin_48dp"
+            android:text="@{@string/fuel_consumption_total_in_ltr(fuelConsumptionReport.fuelConsumptionInLtr)}"
+            tools:text="Fuel Consumption: 3088.69 Ltr." />
+
+    </LinearLayout>
+
+</layout>

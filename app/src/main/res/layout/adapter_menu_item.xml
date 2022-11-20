@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="menu"
+            type="org.digital.tracking.model.MenuModel" />
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/menuRootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:divider="@drawable/layout_divider_8dp"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/margin_48dp"
+        android:orientation="horizontal"
+        android:padding="@dimen/margin_8dp"
+        android:showDividers="middle"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:id="@+id/menuIcon"
+            android:layout_width="@dimen/margin_48dp"
+            android:layout_height="@dimen/margin_48dp"
+            android:contentDescription="@string/menu_icon"
+            android:padding="@dimen/margin_8dp"
+            app:setMenuIcon="@{menu.iconResId}"
+            app:srcCompat="@drawable/ic_baseline_history_24_grey" />
+
+        <TextView
+            android:id="@+id/menuTitle"
+            style="@style/HeadingMediumTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            app:setMenuTitle="@{menu.titleResId}"
+            tools:text="@string/title" />
+
+    </LinearLayout>
+
+</layout>

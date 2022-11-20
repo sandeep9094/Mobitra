@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "320218888151",
+    "project_id": "mobitra-f98ad",
+    "storage_bucket": "mobitra-f98ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320218888151:android:1c794256c0a05f89f93d92",
+        "android_client_info": {
+          "package_name": "com.mobitra.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "320218888151-0qksvnhr3iiciq9vmftjqhcbkctgeqfe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mobitra.app",
+            "certificate_hash": "6b8807abeb446f7d71fd945cd80df1b5503ce093"
+          }
+        },
+        {
+          "client_id": "320218888151-opeu1259damfg8esgmm0dgk96ukv3pga.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtbrTWWWbWJlL0ffLZkvVT0-ZmytNAdv8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "320218888151-opeu1259damfg8esgmm0dgk96ukv3pga.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

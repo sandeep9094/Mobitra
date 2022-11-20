@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="@drawable/layout_divider_8dp"
+    android:orientation="vertical"
+    android:paddingVertical="@dimen/margin_16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_16dp"
+        android:baselineAligned="false"
+        android:divider="@drawable/layout_divider_16dp"
+        android:orientation="horizontal"
+        android:showDividers="middle">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/datePickerLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:focusable="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/fromDateEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="@string/from_date"
+                android:inputType="date"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:clickable="false"
+            android:focusable="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/toDateEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="@string/to_date"
+                android:inputType="date"
+                android:singleLine="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <TextView
+        style="@style/HeadingLargeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_16dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:text="@string/select_vehicle" />
+
+    <ListView
+        android:id="@+id/vehicleList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@android:layout/simple_list_item_1" />
+
+
+</LinearLayout>

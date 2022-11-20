@@ -1,0 +1,26 @@
+query lastLocations(
+    $vehicleNums: [String]
+    $IMEINumbers: [String]
+    $startDateTime: String!
+    $endDateTime: String!
+) {
+    lastLocation(
+        vehicleNums: $vehicleNums
+        IMEINumbers: $IMEINumbers
+        startDateTime: $startDateTime
+        endDateTime: $endDateTime
+    ) {
+        IMEINumber
+        vehicleNum
+        time
+        currentDate
+        currentTime
+        latitude
+        longitude
+        speed
+        ignitionStat
+        gpsFixState
+        totalDistance
+        gsmSigStr
+    }
+}

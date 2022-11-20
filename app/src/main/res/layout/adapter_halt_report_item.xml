@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/reportLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@drawable/layout_divider_8dp"
+        android:gravity="center"
+        android:minHeight="@dimen/margin_48dp"
+        android:padding="@dimen/margin_8dp">
+
+        <TextView
+            android:id="@+id/dateTimeTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="@string/date" />
+
+        <TextView
+            android:id="@+id/vehicleNumberTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:visibility="visible"
+            tools:text="@string/vehicle_number" />
+
+        <TextView
+            android:id="@+id/haltsCountTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:visibility="visible"
+            tools:text="@string/halt" />
+
+        <TextView
+            android:id="@+id/addressTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="@string/address" />
+
+    </LinearLayout>
+</layout>

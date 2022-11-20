@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="color_primary">#FF5722</color>
+    <color name="color_primary_dark">#E64A19</color>
+    <color name="color_primary_light">#FFCCBC</color>
+    <color name="color_accent">#FF9800</color>
+    <color name="colorPrimary">@color/color_primary</color>
+
+    <color name="color_button_primary">@color/colorPrimary</color>
+    <color name="color_button_secondary">#FFFFFF</color>
+    <color name="color_button_secondary_stroke">@color/colorPrimary</color>
+
+    <color name="color_text_heading">#141414</color>
+    <color name="color_text_heading_theme">@color/color_primary</color>
+    <color name="color_text_primary">#212121</color>
+    <color name="color_text_secondary">#757575</color>
+    <color name="color_text_light_grey">@color/color_text_secondary</color>
+    <color name="color_text_green">#5BB35F</color>
+    <color name="color_text_blue">#1258CE</color>
+    <color name="color_text_red">#EE0908</color>
+    <color name="color_text_yellow">#ffd500</color>
+    <color name="color_text_yellow_dark">#ECC500</color>
+
+    <color name="color_text_grey_2">#9EA19C</color>
+    <color name="bg_light_indigo_blue">#D1DFEC</color>
+    <color name="bg_green">#3F8E3E</color>
+    <color name="bg_red">#F20201</color>
+    <color name="bg_blue">#BF005EFF</color>
+    <color name="bg_grey">#9D9998</color>
+    <color name="bg_orange">#FF6900</color>
+    <color name="bg_yellow">#EAC300</color>
+
+    <color name="vehicle_status_icon_green">#23B600</color>
+    <color name="vehicle_status_icon_red">#FF0000</color>
+
+    <color name="color_divider">#BDBDBD</color>
+    <color name="white_50_percent_transpacrency">#80FFFFFF</color>
+
+    <color name="bg_dashboard_stats">#031F10</color>
+
+    <color name="icon_tint_green">#23B600</color>
+    <color name="icon_tint_yellow">#FFd500</color>
+    <color name="icon_tint_red">#FF0000</color>
+    <color name="icon_tint_grey">#9D9998</color>
+
+
+</resources>

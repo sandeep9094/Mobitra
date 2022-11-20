@@ -1,0 +1,299 @@
+<resources>
+    <string name="app_name">Mobitra</string>
+    <string name="not_available">N/A</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="account">Account</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="remember_me">Remember me</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="email_username_required">Email or Username*</string>
+    <string name="email_required">Email*</string>
+    <string name="password">Password</string>
+    <string name="password_required">Password*</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="message_sign_up">Doesn\'t have an account?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_account">Create Account</string>
+    <string name="full_name">Full Name</string>
+    <string name="name">Name</string>
+    <string name="name_required">Name*</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="confirm_password_required">Confirm Password*</string>
+    <string name="error_message_invalid_email">Invalid Email</string>
+    <string name="error_message_invalid_username">Invalid Username</string>
+    <string name="error_message_password_empty">Password is empty!</string>
+    <string name="error_message_empty_name">Name is empty</string>
+    <string name="error_message_password_doesnt_match">Password doesn\'t match</string>
+    <string name="error_message_email_already_exist">Email already exists</string>
+    <string name="error_message_user_already_exist">User account email/mobile already exists!</string>
+    <string name="message_create_account_success">User account create successfully</string>
+    <string name="logout">Logout</string>
+    <string name="message_agree_privacy_policy">By continuing you agree to \nTerms of Service and Privacy Policy</string>
+    <string name="external_tracking">External Tracking</string>
+    <string name="message_line_or">------------------- OR -------------------</string>
+    <string name="imei">IMEI</string>
+    <string name="imei_required">IMEI*</string>
+    <string name="sim_number">Sim Number</string>
+    <string name="sim_number_required">Sim Number*</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="pincode">Pincode</string>
+    <string name="pincode_required">Pincode*</string>
+    <string name="address">Address</string>
+    <string name="address_required">Address*</string>
+    <string name="user_name">User Name</string>
+    <string name="user_name_required">User Name*</string>
+    <string name="reference_id">Reference ID</string>
+    <string name="map">Map</string>
+    <string name="list">List</string>
+    <string name="reports">Reports</string>
+    <string name="other">Other</string>
+    <string name="search">Search</string>
+    <string name="vehicle_type">Vehicle Type</string>
+    <string name="vehicle_type_required">Vehicle Type*</string>
+    <string name="select_device">Select Device</string>
+    <string name="select_device_required">Select Device*</string>
+    <string name="self">Self</string>
+    <string name="driver">Driver</string>
+    <string name="select_country">Select Country</string>
+    <string name="select_country_required">Select Country*</string>
+    <string name="select_state">Select State</string>
+    <string name="select_state_required">Select State*</string>
+    <string name="select_city">Select City</string>
+    <string name="select_city_required">Select City*</string>
+    <string name="car">Car</string>
+    <string name="bus">Bus</string>
+    <string name="truck">Truck</string>
+    <string name="camera">Camera</string>
+    <string-array name="spinner_vehicle_types_items">
+        <item>@string/vehicle_type_required</item>
+        <item>@string/car</item>
+        <item>@string/bus</item>
+        <item>@string/truck</item>
+    </string-array>
+    <string-array name="spinner_select_device_items">
+        <item>@string/select_device_required</item>
+        <item>@string/other</item>
+    </string-array>
+    <string-array name="spinner_user_type_items">
+        <item>@string/self</item>
+        <item>@string/driver</item>
+    </string-array>
+    <string-array name="spinner_select_country">
+        <item>@string/select_country_required</item>
+        <item>@string/india</item>
+    </string-array>
+    <string-array name="spinner_select_state">
+        <item>@string/select_state_required</item>
+        <item>Andaman and Nicobar Islands</item>
+        <item>Andhra Pradesh</item>
+        <item>Arunachal Pradesh</item>
+        <item>Assam</item>
+        <item>Bihar</item>
+        <item>Chandigarh</item>
+        <item>Chhattisgarh</item>
+        <item>Dadra and Nagar Haveli</item>
+        <item>Daman and Diu</item>
+        <item>Delhi</item>
+        <item>Goa</item>
+        <item>Gujarat</item>
+        <item>Haryana</item>
+        <item>Himachal Pradesh</item>
+        <item>Jammu and Kashmir</item>
+        <item>Jharkhand</item>
+        <item>Karnataka</item>
+        <item>Kerala</item>
+        <item>Lakshadweep</item>
+        <item>Madhya Pradesh</item>
+        <item>Maharashtra</item>
+        <item>Manipur</item>
+        <item>Meghalaya</item>
+        <item>Mizoram</item>
+        <item>Nagaland</item>
+        <item>Orissa</item>
+        <item>Pondicherry</item>
+        <item>Punjab</item>
+        <item>Rajasthan</item>
+        <item>Sikkim</item>
+        <item>Tamil Nadu</item>
+        <item>Telangana</item>
+        <item>Tripura</item>
+        <item>Uttaranchal</item>
+        <item>Uttar Pradesh</item>
+        <item>West Bengal</item>
+    </string-array>
+
+    <string-array name="spinner_select_city">
+        <item>@string/select_city_required</item>
+    </string-array>
+    <string-array name="spinner_select_vehicle">
+        <item>@string/select_vehicle</item>
+    </string-array>
+    <string-array name="on_boarding_titles">
+        <item>@string/title_location_tracking</item>
+        <item>@string/title_my_current_location</item>
+        <item>@string/title_navigation</item>
+        <item>@string/title_data_reports</item>
+    </string-array>
+    <string name="title_location_tracking">Location Tracking</string>
+    <string name="title_my_current_location">My Current Location</string>
+    <string name="title_navigation">Navigation</string>
+    <string name="title_data_reports">Data Reports</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_history_view">History View</string>
+    <string name="title_replay_view">Replay View</string>
+    <string name="title_advance_history">Advance History</string>
+    <string name="title_stop_resume_vehicle">Stop/Resume Vehicle</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_share_app">Share App</string>
+    <string name="title_rate_us">Rate Us</string>
+    <string name="title_terms_and_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="title_privacy_policy">Privacy Policy</string>
+    <string name="title_feedback">Feedback</string>
+    <string name="title_share_track_link">Share Track Link</string>
+    <string name="title_notification_settings">Notification Settings</string>
+    <string name="title_change_language">Change Language</string>
+    <string name="title_upload_documents">Upload Documents</string>
+    <string name="menu_icon">Menu Icon</string>
+    <string name="title">Title</string>
+
+    <string name="title_detail_report">Detail Report</string>
+    <string name="title_distance_report">Distance Report</string>
+    <string name="title_daily_distance_report">Daily Distance Report</string>
+    <string name="title_over_speed_report">Over Speed Report</string>
+    <string name="title_last_location_report">Last Location Report</string>
+    <string name="title_fuel_consumption_report">Fuel Consumption Report</string>
+    <string name="title_halt_report">Halt Report</string>
+    <string name="title_summary_report">Summary Report</string>
+    <string name="title_stopage_summary">Stopage Report</string>
+    <string name="title_sensor">Sensor</string>
+    <string name="profile">Profile</string>
+    <string name="mobile">Mobile</string>
+    <string name="status">Status:</string>
+    <string name="driven_today">Driven Today:</string>
+    <string name="vehicle_name">Vehicle Name</string>
+    <string name="vehicle">Vehicle</string>
+    <string name="vehicle_number">Vehicle Number</string>
+    <string name="select_vehicle">Select Vehicle</string>
+    <string name="month">Month</string>
+    <string name="week">Week</string>
+    <string name="day">Day</string>
+    <string name="running_km_chart">Running KM Chart</string>
+    <string name="vehicles">Vehicles</string>
+    <string name="all_vehicles">All Vehicles</string>
+    <string name="overview">Overview</string>
+    <string name="start_point">Start Point</string>
+    <string name="date">Date</string>
+    <string name="point">Point</string>
+    <string name="speed">Speed</string>
+    <string name="speed_colon">Speed:</string>
+    <string name="distance_unit_km">Km</string>
+    <string name="placeholder_vehicle_number">HR47D6782</string>
+    <string name="placeholder_distance_km">15443.43</string>
+    <string name="fuel_consumption_total_in_ltr">Fuel Consumption: %1$s Ltr.</string>
+    <string name="stay_time">Stay Time</string>
+    <string name="view">View</string>
+    <string name="view_location">View Location</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="moving">Moving</string>
+    <string name="idle">Idle</string>
+    <string name="parked">Parked</string>
+    <string name="in_active">In-Active</string>
+    <string name="last_contact">Last contact :</string>
+    <string name="driver_behavior">Driver behavior</string>
+    <string name="engine_condition">Engine Condition :</string>
+    <string name="ignition_">Ignition :</string>
+    <string name="ok">OK</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
+    <string name="moved">Moved</string>
+    <string name="parking">Parking</string>
+    <string name="vehicle_status">Vehicle Status</string>
+    <string name="unknown">Unknown</string>
+    <string name="title_continue">Continue</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="phone_number_required">Phone Number*</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="enter_the_otp_sent_to_your_mobile_number">Enter the OTP sent to your mobile number</string>
+    <string name="one_time_password">One Time Password</string>
+    <string name="one_time_password_required">One Time Password*</string>
+    <string name="verify_otp">Verify OTP</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="sign_up_with_email">Sign Up with Email</string>
+    <string name="sign_up_with_phone">Sign Up with Phone</string>
+    <string name="message_error_phone_number">Enter valid phone number</string>
+    <string name="message_error_valid_otp">Enter valid OTP</string>
+    <string name="message_enter_phone_number">Enter your phone number</string>
+    <string name="message_error_invalid_otp">Invalid OTP</string>
+    <string name="message_success_sign_in">Sign In Successful</string>
+    <string name="message_enter_email_address">Enter your email address</string>
+    <string name="india">India</string>
+    <string name="city">City</string>
+    <string name="city_required">City*</string>
+    <string name="message_error_invalid_imei">Invalid IMEI</string>
+    <string name="message_error_invalid_vehicle_type">Invalid Vehicle Type</string>
+    <string name="message_error_invalid_device_type">Invalid Device Type</string>
+    <string name="message_error_invalid_country">Select valid country</string>
+    <string name="message_error_invalid_state">Select valid state</string>
+    <string name="message_error_invalid_city">City is empty</string>
+    <string name="message_error_invalid_user_name">User name is empty</string>
+    <string name="message_error_empty_address">Address is empty</string>
+    <string name="message_error_invalid_pincode">Invalid Pincode</string>
+    <string name="message_error_invalid_sim_number">Invalid Sim Number</string>
+    <string name="login_with_phone">Login with Phone</string>
+    <string name="login_with_email">Login with Email</string>
+    <string name="login_with_email_or_username">Login with Email or Username</string>
+    <string name="login_with_username">Login with Username</string>
+    <string name="placeholder_email">test@gmail.com</string>
+    <string name="placeholder_mobile_number">1234567890</string>
+    <string name="placeholder_name">Raman Kumar</string>
+    <string name="location">Location</string>
+    <string name="live_tracking">Live Tracking</string>
+    <string name="error_message_no_list_found">No list found</string>
+    <string name="error_message_no_records_found">No records found</string>
+    <string name="error_message_default">Something went wrong!</string>
+    <string name="error_message_failed_to_fetch_location">Failed to fetch location</string>
+    <string name="error_message_location_permission_required">Location permission is required</string>
+    <string name="error_message_invalid_vehicle_number">Invalid vehicle number</string>
+    <string name="error_message_failed_to_add_new_device">Failed to add new device</string>
+    <string name="error_message_failed_to_send_otp">Failed to send reset password OTP</string>
+    <string name="success_message_reset_password_send_otp">Password reset OTP sent to email</string>
+    <string name="success_message_failed_to_add_new_device">New device added successfully</string>
+    <string name="error_message_wrong_otp">Wrong OTP entered!</string>
+    <string name="error_message_password_change">Failed to change new password!</string>
+    <string name="distance">Distance</string>
+    <string name="placeholder_time">11:14:53 AM</string>
+    <string name="placeholder_distance">0 Kms</string>
+    <string name="stop">Stop</string>
+    <string name="ideal">Ideal</string>
+    <string name="running">Running</string>
+    <string name="total_stop">Total Stop</string>
+    <string name="max_speed">Max. Speed</string>
+    <string name="avg_speed">Avg. Speed</string>
+    <string name="play_pause">Play/Pause</string>
+    <string name="time">Time</string>
+    <string name="placeholder_speed">25.35 Km/hrs</string>
+    <string name="placeholder_date">17-Sep-2022</string>
+    <string name="km">Km</string>
+    <string name="error_message_invalid_credentials">Authentication failed! Invalid credentials</string>
+    <string name="year">Year</string>
+    <string name="my_devices">My Devices</string>
+    <string name="add_device">Add device</string>
+    <string name="add_new_device">Add new device</string>
+    <string name="all">All</string>
+    <string name="no_data">No Data</string>
+    <string name="halt">Halt</string>
+    <string name="from_date">From Date</string>
+    <string name="to_date">To Date</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="message_forgot_password">A reset password OTP will be sent to the below entered email address.</string>
+    <string name="change_password">Change Password</string>
+    <string name="message_verify_otp">Enter the OTP sent to your email address.</string>
+    <string name="enter_your_new_password">Enter your new password</string>
+    <string name="success_message_password_change">Password changed successfully</string>
+    <string name="generate_reset_password_otp">Generate Reset Password OTP</string>
+
+</resources>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="org.digital.tracking">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:name=".DigitalTrackingApplication"
+        android:allowBackup="true"
+        android:fullBackupContent="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.DigitalTracking"
+        tools:targetApi="31">
+        <activity
+            android:name=".view.activity.ChangePasswordActivity"
+            android:exported="false"></activity>
+        <activity
+            android:name=".view.activity.VerifyOtpActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".view.activity.ForgotPasswordActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".view.activity.AddDeviceActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".view.activity.LiveLocationActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.HistoryViewActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".auth.SignUpEmailActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" /> <!-- MobiTra UAT Key -->
+        <!-- <meta-data -->
+        <!-- android:name="com.google.android.geo.API_KEY" -->
+        <!-- android:value="AIzaSyDf_CQG-iKl9f3zDQZjbB6fezgHp9f-VZ8" /> -->
+        <!-- MobiTra Live Key -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAeqIjATMfUG1pnWTTwrp-zVluMpu1Br5A" />
+
+        <activity
+            android:name=".view.activity.MapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.ProfileActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".auth.SignUpActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".auth.SignUpPhoneActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.SplashActivity"
+            android:exported="true"
+            android:noHistory="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".auth.UserAuthActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.activity.OnboardingActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>

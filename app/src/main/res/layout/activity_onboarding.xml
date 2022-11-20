@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.activity.OnboardingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/on_boarding_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:divider="@drawable/layout_divider_16dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/margin_16dp"
+            android:showDividers="middle|end">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:divider="@drawable/layout_divider_8dp"
+                android:orientation="horizontal"
+                android:showDividers="middle">
+
+                <ImageView
+                    android:id="@+id/circle_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/bg_circle_orange" />
+
+                <ImageView
+                    android:id="@+id/circle_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/bg_circle_orange_outlined" />
+
+                <ImageView
+                    android:id="@+id/circle_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/bg_circle_orange_outlined" />
+
+                <ImageView
+                    android:id="@+id/circle_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/bg_circle_orange_outlined" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/continue_button"
+                style="@style/PrimaryButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_16dp"
+                android:layout_marginTop="@dimen/margin_16dp"
+                android:text="@string/title_continue" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</layout>

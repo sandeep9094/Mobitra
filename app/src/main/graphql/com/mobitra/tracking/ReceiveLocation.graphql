@@ -1,0 +1,21 @@
+subscription ReceiveLocation(
+    $VehicleNum: String
+    $IMEINumber: String
+) {
+    receiveLocation( vehicleNum:$VehicleNum, IMEINumber: $IMEINumber) {
+        IMEINumber
+        vehicleNum
+        latitude
+        longitude
+        currentDate
+        currentTime
+        speed
+        gpsFixState
+        ignitionStat
+        totalDistance
+        gsmSigStr
+        tags {
+            IMEINumber
+        }
+    }
+}

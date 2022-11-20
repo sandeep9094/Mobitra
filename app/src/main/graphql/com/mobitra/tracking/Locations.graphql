@@ -1,0 +1,27 @@
+query locations(
+    $vehicleNum: String
+    $IMEINumber: String
+    $startDateTime: String!
+    $endDateTime: String!
+) {
+    locations(
+        vehicleNum: $vehicleNum
+        IMEINumber: $IMEINumber
+        startDateTime: $startDateTime
+        endDateTime: $endDateTime
+    ) {
+        vendorId
+        IMEINumber
+        vehicleNum
+        time
+        currentDate
+        currentTime
+        latitude
+        latitudeDir
+        longitude
+        longitudeDir
+        speed
+        totalDistance
+        gsmSigStr
+    }
+}

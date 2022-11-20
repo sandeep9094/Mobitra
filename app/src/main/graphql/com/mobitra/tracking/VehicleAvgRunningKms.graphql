@@ -1,0 +1,13 @@
+query vehiclesAverageRunning(
+    $IMEINumber: String!
+) {
+    vehiclesAverageRunning(
+        IMEINumber: $IMEINumber
+    ) {
+        IMEINumber
+        vehicleNum
+        weeklyKms
+        monthlyKms
+        yearlyKms
+    }
+}

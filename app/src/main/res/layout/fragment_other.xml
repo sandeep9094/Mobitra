@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.fragments.OtherFragment">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/layout_home_toolbar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/otherMenuRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:itemCount="3"
+        tools:listitem="@layout/adapter_menu_item" />
+
+</LinearLayout>

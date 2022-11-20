@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home"
+        app:showAsAction="withText" />
+
+    <item
+        android:id="@+id/navigation_map"
+        android:icon="@drawable/ic_baseline_location_on_24"
+        android:title="@string/map"
+        app:showAsAction="withText" />
+
+    <item
+        android:id="@+id/navigation_list"
+        android:icon="@drawable/ic_baseline_list_24"
+        android:title="@string/list"
+        android:visible="false"
+        app:showAsAction="withText" />
+
+    <item
+        android:id="@+id/navigation_reports"
+        android:icon="@drawable/ic_baseline_text_snippet_24"
+        android:title="@string/reports"
+        app:showAsAction="withText" />
+
+    <item
+        android:id="@+id/navigation_other"
+        android:icon="@drawable/ic_baseline_menu_24"
+        android:title="@string/other"
+        app:showAsAction="withText" />
+
+</menu>

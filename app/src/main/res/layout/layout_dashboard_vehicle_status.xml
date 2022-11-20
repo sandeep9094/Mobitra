@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_16dp"
+    android:divider="@drawable/layout_divider_16dp"
+    android:orientation="horizontal"
+    android:paddingVertical="4dp"
+    android:showDividers="beginning|middle|end"
+    android:visibility="visible">
+
+    <LinearLayout
+        android:id="@+id/runningVehicles"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_circle_green"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_baseline_directions_car_24"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/runningTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/running" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/stopVehicles"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_circle_red"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_baseline_directions_car_24"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/stopTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/stop" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/idleVehicles"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_circle_yellow_64"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_baseline_directions_car_24"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/idleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/idle" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/noDataVehicles"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_circle_grey_64"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_baseline_directions_car_24"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/unknownTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/no_data" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/allVehicles"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_circle_blue"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_baseline_directions_car_24"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/allTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/all" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

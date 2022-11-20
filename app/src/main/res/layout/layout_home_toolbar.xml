@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_toolbar_root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorPrimary"
+    android:divider="@drawable/layout_divider_8dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:showDividers="middle|beginning|end">
+
+    <ImageView
+        android:id="@+id/actionLeft"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/search"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_baseline_menu_24"
+        android:visibility="gone"
+        app:tint="@color/white" />
+
+    <TextView
+        android:id="@+id/home_toolbar_title"
+        style="@style/HeadingLargeTextView"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/margin_8dp"
+        android:singleLine="true"
+        android:text="@string/app_name"
+        android:textColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/menuSearch"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/search"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_baseline_search_24_white"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/menuNotifications"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/search"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_baseline_notifications_24_white"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/menuAccount"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/search"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_baseline_account_circle_24_white"
+        android:visibility="visible" />
+
+</LinearLayout>

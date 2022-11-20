@@ -1,0 +1,7 @@
+query GetVehicles(
+    $IMEINumber: String!
+) {
+    vehiclesAverageRunning(IMEINumber: $IMEINumber) {
+        vehicleNum
+    }
+}

@@ -1,0 +1,21 @@
+query GetDeviceLocations(
+    $IMEINumber: String
+    $startDateTime: String!
+    $endDateTime: String!
+) {
+    locations(
+        IMEINumber:$IMEINumber
+        startDateTime: $startDateTime
+        endDateTime: $endDateTime
+    ) {
+        IMEINumber
+        vehicleNum
+        gpsFixState
+        latitude
+        longitude
+        speed
+        ignitionStat
+        mainsPowerStat
+        gsmSigStr
+    }
+}

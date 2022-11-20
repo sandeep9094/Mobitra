@@ -1,0 +1,21 @@
+query StopageReport(
+    $IMEINumber: String!
+    $startDateTime: String!
+    $endDateTime: String!
+) {
+    stoppageReport(
+        IMEINumber: $IMEINumber
+        startDateTime: $startDateTime
+        endDateTime: $endDateTime
+    ) {
+        IMEINumber
+        vehicleNum
+        totalRunningTime
+        totalIdealTime
+        totalStopTime
+        totalDistance
+        avgSpeed
+        maxSpeed
+        totalStops
+    }
+}

@@ -1,0 +1,39 @@
+query Reports(
+    $IMEINumber: String!
+    $startDateTime: String!
+    $endDateTime: String!
+) {
+    reports(
+        IMEINumber: $IMEINumber
+        startDateTime: $startDateTime
+        endDateTime: $endDateTime
+    ) {
+        IMEINumber
+        vehicleNum
+        startPoint {
+            latitude
+            longitude
+            currentDate
+            currentTime
+        }
+        endPoint {
+            latitude
+            longitude
+            currentDate
+            currentTime
+        }
+        haltReport {
+            latitude
+            longitude
+            currentDate
+            currentTime
+        }
+        overSpeedReport {
+            latitude
+            longitude
+            currentDate
+            currentTime
+            speed
+        }
+    }
+}

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="org.digital.tracking.view.fragments.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_map"
+        android:name="org.digital.tracking.view.fragments.MapFragment"
+        android:label="@string/map"
+        tools:layout="@layout/fragment_map" />
+
+    <fragment
+        android:id="@+id/navigation_list"
+        android:name="org.digital.tracking.view.fragments.ListFragment"
+        android:label="@string/list"
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/action_navigation_list_to_viewVehicleFragment"
+            app:destination="@id/viewVehicleFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_reports"
+        android:name="org.digital.tracking.view.fragments.ReportsFragment"
+        android:label="@string/reports"
+        tools:layout="@layout/fragment_reports">
+        <action
+            android:id="@+id/action_navigation_reports_to_distanceReportFragment"
+            app:destination="@id/distanceReportFragment" />
+        <action
+            android:id="@+id/action_navigation_reports_to_overSpeedReportFragment"
+            app:destination="@id/overSpeedReportFragment" />
+        <action
+            android:id="@+id/action_navigation_reports_to_lastLocationFragment"
+            app:destination="@id/lastLocationFragment" />
+        <action
+            android:id="@+id/action_navigation_reports_to_fuelConsumptionReportFragment"
+            app:destination="@id/fuelConsumptionReportFragment" />
+        <action
+            android:id="@+id/action_navigation_reports_to_haltReportFragment"
+            app:destination="@id/haltReportFragment" />
+        <action
+            android:id="@+id/action_navigation_reports_to_dailyDistanceReportFragment"
+            app:destination="@id/dailyDistanceReportFragment" />
+        <action
+            android:id="@+id/action_navigation_reports_to_summaryReportFragment"
+            app:destination="@id/summaryReportFragment" />
+        <action
+            android:id="@+id/action_navigation_reports_to_stopageReportFragment"
+            app:destination="@id/stopageReportFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_other"
+        android:name="org.digital.tracking.view.fragments.OtherFragment"
+        android:label="@string/other"
+        tools:layout="@layout/fragment_other">
+        <action
+            android:id="@+id/action_navigation_other_to_stopResumeVehicleFragment"
+            app:destination="@id/stopResumeVehicleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stopResumeVehicleFragment"
+        android:name="org.digital.tracking.view.fragments.StopResumeVehicleFragment"
+        android:label="fragment_stop_resume_vehicle"
+        tools:layout="@layout/fragment_stop_resume_vehicle" />
+    <fragment
+        android:id="@+id/distanceReportFragment"
+        android:name="org.digital.tracking.view.fragments.DistanceReportFragment"
+        android:label="fragment_distance_report"
+        tools:layout="@layout/fragment_distance_report" />
+    <fragment
+        android:id="@+id/overSpeedReportFragment"
+        android:name="org.digital.tracking.view.fragments.OverSpeedReportFragment"
+        android:label="fragment_overspeed_report"
+        tools:layout="@layout/fragment_overspeed_report" />
+    <fragment
+        android:id="@+id/lastLocationFragment"
+        android:name="org.digital.tracking.view.fragments.LastLocationFragment"
+        android:label="fragment_last_location"
+        tools:layout="@layout/fragment_last_location" />
+    <fragment
+        android:id="@+id/fuelConsumptionReportFragment"
+        android:name="org.digital.tracking.view.fragments.FuelConsumptionReportFragment"
+        android:label="fragment_fuel_consumption_report"
+        tools:layout="@layout/fragment_fuel_consumption_report" />
+    <fragment
+        android:id="@+id/haltReportFragment"
+        android:name="org.digital.tracking.view.fragments.HaltReportFragment"
+        android:label="fragment_halt_report"
+        tools:layout="@layout/fragment_halt_report" />
+    <fragment
+        android:id="@+id/viewVehicleFragment"
+        android:name="org.digital.tracking.view.fragments.ViewVehicleFragment"
+        android:label="ViewVehicleFragment" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="org.digital.tracking.view.fragments.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/dailyDistanceReportFragment"
+        android:name="org.digital.tracking.view.fragments.DailyDistanceReportFragment"
+        android:label="fragment_daily_distance_report"
+        tools:layout="@layout/fragment_daily_distance_report" />
+    <fragment
+        android:id="@+id/summaryReportFragment"
+        android:name="org.digital.tracking.view.fragments.SummaryReportFragment"
+        android:label="fragment_summary_report"
+        tools:layout="@layout/fragment_summary_report" />
+    <fragment
+        android:id="@+id/stopageReportFragment"
+        android:name="org.digital.tracking.view.fragments.StopageReportFragment"
+        android:label="fragment_stopage_report"
+        tools:layout="@layout/fragment_stopage_report" />
+
+</navigation>
