@@ -57,12 +57,49 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:itemCount="3"
-            tools:listitem="@layout/adapter_distance_report_item" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                tools:listitem="@layout/adapter_distance_report_item" />
+
+            <LinearLayout
+                android:id="@+id/totalDistanceLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:showDividers="middle"
+                android:divider="@drawable/layout_divider_8dp"
+                android:gravity="center"
+                android:layout_gravity="bottom"
+                android:minHeight="@dimen/margin_48dp"
+                android:padding="@dimen/margin_8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="@string/total_distance_colon"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/totalDistanceTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:text="@string/placeholder_distance"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/progress"
@@ -80,6 +117,7 @@
             android:text="@string/error_message_no_list_found"
             android:visibility="gone"
             tools:visibility="visible" />
+
 
     </FrameLayout>
 

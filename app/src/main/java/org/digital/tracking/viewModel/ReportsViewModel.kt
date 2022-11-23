@@ -4,14 +4,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.apollographql.apollo3.ApolloClient
+import com.apollographql.apollo3.api.Optional
 import com.apollographql.apollo3.exception.ApolloException
+import com.mobitra.tracking.LastLocationsQuery
 import com.mobitra.tracking.ReportsQuery
 import com.mobitra.tracking.StopageReportQuery
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.digital.tracking.di.ResourceProvider
 import org.digital.tracking.model.ApiResult
-import org.digital.tracking.repository.cache.UserCacheManager
 import org.digital.tracking.utils.*
 import javax.inject.Inject
 
@@ -27,6 +28,7 @@ class ReportsViewModel @Inject constructor(
     val haltReportApiResult: MutableLiveData<ApiResult<List<ReportsQuery.Report?>>> = MutableLiveData()
     val dailyDistanceReportResult: MutableLiveData<ApiResult<List<ReportsQuery.Report?>>> = MutableLiveData()
     val stopageReportApiResult: MutableLiveData<ApiResult<List<StopageReportQuery.StoppageReport?>>> = MutableLiveData()
+    val totalDistanceReportApiResult: MutableLiveData<ApiResult<List<LastLocationsQuery.LastLocation?>>> = MutableLiveData()
 
     fun getReport(imeiNumber: String, fromDate: String = reportStartDate, toDate: String = reportEndDate) {
         reportApiResult.value = ApiResult.Loading
@@ -44,6 +46,28 @@ class ReportsViewModel @Inject constructor(
                 return@launch
             }
             reportApiResult.value = ApiResult.Success(reports)
+        }
+    }
+
+    fun getTotalDistanceReport(imeiNumber: String, fromDate: String = reportStartDate, toDate: String = reportEndDate) {
+        totalDistanceReportApiResult.value = ApiResult.Loading
+        viewModelScope.launch {
+            val response = try {
+                val lastLocationsQuery = LastLocationsQuery(
+                    Optional.Absent, Optional.Present(listOf(imeiNumber)),
+                    fromDate, toDate
+                )
+                apolloClient.query(lastLocationsQuery).execute()
+            } catch (e: ApolloException) {
+                totalDistanceReportApiResult.value = ApiResult.Error(resourceProvider.defaultError)
+                return@launch
+            }
+            val lastLocations = response.data?.lastLocation
+            if (lastLocations.isNullOrEmpty()) {
+                totalDistanceReportApiResult.value = ApiResult.Error(resourceProvider.defaultError)
+                return@launch
+            }
+            totalDistanceReportApiResult.value = ApiResult.Success(lastLocations)
         }
     }
 

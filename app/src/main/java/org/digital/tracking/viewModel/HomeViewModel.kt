@@ -161,11 +161,7 @@ class HomeViewModel @Inject constructor(
                         return
                     }
                     UserCacheManager.setUser(it.payload, sharedPrefs)
-//                    if (callingFromFetchVehicles) {
                     fetchAllVehicles()
-//                    } else {
-//                        getVehicleList()
-//                    }
                 }
             }
 

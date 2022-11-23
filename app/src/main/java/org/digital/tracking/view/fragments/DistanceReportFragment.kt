@@ -1,12 +1,10 @@
 package org.digital.tracking.view.fragments
 
-import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.ListView
 import androidx.appcompat.app.AlertDialog
@@ -53,6 +51,7 @@ class DistanceReportFragment : ReportsBaseFragment() {
                     binding.progress.makeVisible()
                     binding.error.makeGone()
                     binding.recyclerView.makeGone()
+                    binding.totalDistanceLayout.makeGone()
                 }
                 is ApiResult.Error -> {
                     showError()
@@ -67,6 +66,27 @@ class DistanceReportFragment : ReportsBaseFragment() {
                     binding.error.makeGone()
                     binding.recyclerView.makeVisible()
                     initReport(haltReportList)
+                }
+            }
+        }
+        viewModel.totalDistanceReportApiResult.observe(viewLifecycleOwner) {
+            when (it) {
+                is ApiResult.Loading -> {
+                }
+                is ApiResult.Error -> {
+                }
+                is ApiResult.Success -> {
+                    val totalDistanceReport = it.data
+                    if (totalDistanceReport.isEmpty()) {
+                        return@observe
+                    }
+                    try {
+                        val distanceReport = totalDistanceReport.first()
+                        binding.totalDistanceTextView.text = distanceReport?.totalDistance.getDistanceString()
+                        binding.totalDistanceLayout.makeVisible()
+                    } catch (exception: Exception) {
+                        binding.totalDistanceLayout.makeGone()
+                    }
                 }
             }
         }
@@ -138,6 +158,7 @@ class DistanceReportFragment : ReportsBaseFragment() {
 
     private fun vehicleSelected(selectedVehicleImei: String, fromDate: String, toDate: String) {
         viewModel.getReport(selectedVehicleImei, fromDate, toDate)
+        viewModel.getTotalDistanceReport(selectedVehicleImei, fromDate, toDate)
     }
 
 }

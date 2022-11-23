@@ -295,5 +295,6 @@
     <string name="enter_your_new_password">Enter your new password</string>
     <string name="success_message_password_change">Password changed successfully</string>
     <string name="generate_reset_password_otp">Generate Reset Password OTP</string>
+    <string name="total_distance_colon">Total Distance:</string>
 
 </resources>

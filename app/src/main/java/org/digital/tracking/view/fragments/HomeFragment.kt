@@ -33,6 +33,7 @@ import org.digital.tracking.model.ApiResult
 import org.digital.tracking.model.DeviceListItem
 import org.digital.tracking.model.DumVehicleAvgRunningResponse
 import org.digital.tracking.repository.VehicleRepository
+import org.digital.tracking.repository.cache.UserCacheManager
 import org.digital.tracking.utils.*
 import org.digital.tracking.view.activity.AddDeviceActivity
 import org.digital.tracking.view.activity.MainActivity
@@ -51,9 +52,6 @@ class HomeFragment : BaseFragment(), View.OnClickListener {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel by activityViewModels<HomeViewModel>()
 
-    @Inject
-    lateinit var dumVehicleAvgRunningResponse: DumVehicleAvgRunningResponse
-
     companion object {
         private const val TAG = "HomeFragment"
     }
@@ -69,7 +67,12 @@ class HomeFragment : BaseFragment(), View.OnClickListener {
 
         setupObservers()
 
-        viewModel.getDeviceList()
+        if (UserCacheManager.getDeviceList().isEmpty()) {
+            viewModel.getDeviceList()
+        } else {
+            prepareDashboard()
+        }
+
         avgRunningKmTimeFrame = AvgRunningKmTimeFrame.WEEK
 
         binding.weekButton.setOnClickListener(this)
@@ -128,6 +131,7 @@ class HomeFragment : BaseFragment(), View.OnClickListener {
                     if (deviceList.isEmpty()) {
                         return@observe
                     }
+                    UserCacheManager.setDeviceList(deviceList)
                     deviceListSize = deviceList.size
                     viewModel.fetchAllVehicles()
                     preparePieChartData(deviceList)
@@ -183,6 +187,19 @@ class HomeFragment : BaseFragment(), View.OnClickListener {
                     prepareChartData(it.data)
                 }
             }
+        }
+    }
+
+    private fun prepareDashboard() {
+        val deviceList = UserCacheManager.getDeviceList()
+        deviceListSize = deviceList.size
+        preparePieChartData(deviceList)
+
+        if (VehicleRepository.getVehicleList().isNotEmpty()) {
+            initSelectVehicleSpinner()
+            initVehicleStatusCountOnUi()
+        } else {
+            viewModel.fetchAllVehicles()
         }
     }
 

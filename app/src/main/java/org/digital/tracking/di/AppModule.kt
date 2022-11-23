@@ -67,14 +67,5 @@ object AppModule {
     @Provides
     fun getAssetManager(@ApplicationContext context: Context) = context.assets
 
-    @Singleton
-    @Provides
-    fun getDummyAvgRunningKms(assetManager: AssetManager): DumVehicleAvgRunningResponse {
-        val input = assetManager.open("dummy_avg_running_kms.json")
-        val jsonParser = JsonParser()
-        val jsonObject = jsonParser.parse(InputStreamReader(input, "UTF-8"))
-        val response = Gson().fromJson(jsonObject, DumVehicleAvgRunningResponse::class.java)
-        return response
-    }
 
 }
