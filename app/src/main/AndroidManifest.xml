@@ -23,7 +23,7 @@
         <activity
             android:name=".view.activity.VerifyOtpActivity"
             android:exported="false"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.activity.ForgotPasswordActivity"
             android:exported="false"

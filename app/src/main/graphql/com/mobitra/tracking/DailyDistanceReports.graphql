@@ -1,0 +1,11 @@
+query DailyDistanceReport(
+    $IMEINumber: String!
+    $startDateTime: String!
+    $endDateTime: String!
+) {
+    dailyReport(
+        IMEINumber:$IMEINumber,
+        startDateTime:$startDateTime,
+        endDateTime:$endDateTime
+    )
+}

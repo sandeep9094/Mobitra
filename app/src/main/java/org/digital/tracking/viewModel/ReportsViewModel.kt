@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.Optional
 import com.apollographql.apollo3.exception.ApolloException
+import com.google.gson.Gson
+import com.mobitra.tracking.DailyDistanceReportQuery
 import com.mobitra.tracking.LastLocationsQuery
 import com.mobitra.tracking.ReportsQuery
 import com.mobitra.tracking.StopageReportQuery
@@ -13,6 +15,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.digital.tracking.di.ResourceProvider
 import org.digital.tracking.model.ApiResult
+import org.digital.tracking.model.DailyDistanceReportResponse
+import org.digital.tracking.model.DailyReport
 import org.digital.tracking.utils.*
 import javax.inject.Inject
 
@@ -26,7 +30,7 @@ class ReportsViewModel @Inject constructor(
     private val reportEndDate = getMonthEndDate()
     val reportApiResult: MutableLiveData<ApiResult<List<ReportsQuery.Report?>>> = MutableLiveData()
     val haltReportApiResult: MutableLiveData<ApiResult<List<ReportsQuery.Report?>>> = MutableLiveData()
-    val dailyDistanceReportResult: MutableLiveData<ApiResult<List<ReportsQuery.Report?>>> = MutableLiveData()
+    val dailyDistanceReportResult: MutableLiveData<ApiResult<List<DailyReport>>> = MutableLiveData()
     val stopageReportApiResult: MutableLiveData<ApiResult<List<StopageReportQuery.StoppageReport?>>> = MutableLiveData()
     val totalDistanceReportApiResult: MutableLiveData<ApiResult<List<LastLocationsQuery.LastLocation?>>> = MutableLiveData()
 
@@ -94,18 +98,24 @@ class ReportsViewModel @Inject constructor(
         dailyDistanceReportResult.value = ApiResult.Loading
         viewModelScope.launch {
             val response = try {
-                val query = ReportsQuery(imeiNumber, fromDate, toDate)
+                val query = DailyDistanceReportQuery(imeiNumber, fromDate, toDate)
                 apolloClient.query(query).execute()
             } catch (e: ApolloException) {
                 dailyDistanceReportResult.value = ApiResult.Error(resourceProvider.defaultError)
                 return@launch
             }
-            val reports = response.data?.reports
-            if (reports.isNullOrEmpty()) {
+            try {
+                val responseString = Gson().toJson(response.data)
+                val reports = Gson().fromJson(responseString, DailyDistanceReportResponse::class.java)
+                if (reports.dailyReport.isNullOrEmpty()) {
+                    dailyDistanceReportResult.value = ApiResult.Success(emptyList())
+                    return@launch
+                }
+                dailyDistanceReportResult.value = ApiResult.Success(reports.dailyReport)
+            } catch (exception: Exception) {
                 dailyDistanceReportResult.value = ApiResult.Success(emptyList())
-                return@launch
             }
-            dailyDistanceReportResult.value = ApiResult.Success(reports)
+
         }
     }
 

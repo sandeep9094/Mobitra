@@ -20,6 +20,7 @@ import org.digital.tracking.adapter.DistanceReportAdapter
 import org.digital.tracking.databinding.FragmentDailyDistanceReportBinding
 import org.digital.tracking.model.ApiResult
 import org.digital.tracking.model.CustomDistanceReport
+import org.digital.tracking.model.DailyReport
 import org.digital.tracking.repository.VehicleRepository
 import org.digital.tracking.utils.*
 import org.digital.tracking.viewModel.ReportsViewModel
@@ -78,9 +79,9 @@ class DailyDistanceReportFragment : ReportsBaseFragment() {
         binding.recyclerView.makeGone()
     }
 
-    private fun initReport(list: List<ReportsQuery.Report?>) {
+    private fun initReport(list: List<DailyReport>) {
         binding.recyclerView.apply {
-            adapter = DistanceReportAdapter(list, fromDailyDistance = true)
+            adapter = DistanceReportAdapter(list)
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
         }

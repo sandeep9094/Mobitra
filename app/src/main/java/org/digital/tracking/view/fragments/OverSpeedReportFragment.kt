@@ -46,7 +46,7 @@ class OverSpeedReportFragment : ReportsBaseFragment() {
     }
 
     private fun setupObserver() {
-        viewModel.dailyDistanceReportResult.observe(viewLifecycleOwner) {
+        viewModel.reportApiResult.observe(viewLifecycleOwner) {
             when (it) {
                 is ApiResult.Loading -> {
                     binding.progress.makeVisible()
@@ -150,7 +150,7 @@ class OverSpeedReportFragment : ReportsBaseFragment() {
     }
 
     private fun vehicleSelected(selectedVehicleImei: String, fromDate: String, toDate: String) {
-        viewModel.getDailyDistanceReport(selectedVehicleImei, fromDate, toDate)
+        viewModel.getReport(selectedVehicleImei, fromDate, toDate)
     }
 
 }

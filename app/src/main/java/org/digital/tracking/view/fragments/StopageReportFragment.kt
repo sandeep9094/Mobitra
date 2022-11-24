@@ -16,7 +16,6 @@ import com.mobitra.tracking.ReportsQuery
 import com.mobitra.tracking.StopageReportQuery
 import dagger.hilt.android.AndroidEntryPoint
 import org.digital.tracking.R
-import org.digital.tracking.adapter.DistanceReportAdapter
 import org.digital.tracking.adapter.StopageReportAdapter
 import org.digital.tracking.databinding.FragmentStopageReportBinding
 import org.digital.tracking.model.ApiResult

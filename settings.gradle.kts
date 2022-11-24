@@ -14,5 +14,5 @@ dependencyResolutionManagement {
         maven(url = "https://jitpack.io")
     }
 }
-rootProject.name = "DigitalTracking"
+rootProject.name = "Mobitra"
 include(":app")

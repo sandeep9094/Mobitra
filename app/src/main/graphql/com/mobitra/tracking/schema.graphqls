@@ -58,6 +58,20 @@ type Query {
     ): [StoppageReport]
 
     #
+    queryRunner(
+        IMEINumber: String
+        startDateTime: String
+        endDateTime: String
+    ): JSON
+
+    #
+    dailyReport(
+        IMEINumber: String
+        startDateTime: String
+        endDateTime: String
+    ): JSON
+
+    #
     Login(IMEINumber: String!): Login
 
     #

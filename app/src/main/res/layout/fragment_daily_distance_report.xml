@@ -22,12 +22,14 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/point"
+            android:visibility="gone"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:visibility="gone"
             android:gravity="center"
             android:text="@string/vehicle_number"
             android:textStyle="bold" />
@@ -40,15 +42,16 @@
             android:gravity="center"
             android:text="@string/date"
             android:textStyle="bold"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/address"
+            android:text="@string/distance"
             android:textStyle="bold" />
+
     </LinearLayout>
 
     <include layout="@layout/view_divider" />
@@ -62,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:itemCount="3"
-            tools:listitem="@layout/adapter_distance_report_item" />
+            tools:listitem="@layout/adapter_daily_distance_report_item" />
 
         <ProgressBar
             android:id="@+id/progress"
