@@ -189,7 +189,8 @@ class LiveLocationActivity : BaseActivity(), OnMapReadyCallback {
                     MarkerOptions().position(destinationLocation).icon(destinationMarkerIcon).title(vehicleNumber)
                 destinationMarker = googleMap?.addMarker(destinationMarkerOptions)
             } else {
-                destinationMarker?.position = destinationLocation
+//                destinationMarker?.position = destinationLocation
+                MapUtils.moveMarkerSmoothly(destinationMarker, destinationLocation).start()
             }
             destinationMarker?.showInfoWindow()
             val directionsUrl = getDirectionURL(originLocation, destinationLocation, mapsApiKey)

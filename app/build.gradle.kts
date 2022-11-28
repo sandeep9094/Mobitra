@@ -98,6 +98,8 @@ dependencies {
     implementation("com.google.android.gms:play-services-safetynet:18.0.1")
     //GraphQL Apollo Kotlin
     implementation("com.apollographql.apollo3:apollo-runtime:3.6.0")
+
+    //Android Testing
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")

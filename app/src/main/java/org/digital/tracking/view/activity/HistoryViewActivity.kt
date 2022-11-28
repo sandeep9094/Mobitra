@@ -23,6 +23,7 @@ import okhttp3.Request
 import org.digital.tracking.R
 import org.digital.tracking.databinding.ActivityHistoryViewBinding
 import org.digital.tracking.enum.ReplayViewSpeed
+import org.digital.tracking.maps.MapUtils
 import org.digital.tracking.model.ApiResult
 import org.digital.tracking.model.MapData
 import org.digital.tracking.repository.VehicleRepository
@@ -301,7 +302,8 @@ class HistoryViewActivity : BaseActivity(), OnMapReadyCallback, View.OnClickList
                     MarkerOptions().position(destinationLocation).icon(destinationMarkerIcon).title(vehicleNumber)
                 destinationMarker = googleMap?.addMarker(destinationMarkerOptions)
             } else {
-                destinationMarker?.position = destinationLocation
+//                destinationMarker?.position = destinationLocation
+                MapUtils.moveMarkerSmoothly(destinationMarker, destinationLocation).start()
             }
             destinationMarker?.showInfoWindow()
             if (enableRoute) {
