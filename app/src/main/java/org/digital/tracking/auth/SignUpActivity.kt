@@ -111,6 +111,13 @@ class SignUpActivity : BaseActivity(), View.OnClickListener {
             return
         }
 
+        val vehicleNumber = binding.vehicleNumberEditText.text.toString().trim()
+        if (vehicleNumber.isEmpty()) {
+            binding.vehicleNumberEditText.error = getString(R.string.error_message_invalid_vehicle_registration_number)
+            binding.vehicleNumberEditText.requestFocus()
+            return
+        }
+
         val selectedVehiclePosition = binding.vehicleTypeSpinner.selectedItemPosition
         val vehicleTypeList = resources.getStringArray(R.array.spinner_vehicle_types_items)
         val vehicleType = vehicleTypeList[selectedVehiclePosition]
@@ -219,7 +226,7 @@ class SignUpActivity : BaseActivity(), View.OnClickListener {
         }
         binding.confirmPasswordEditText.hideKeyboard(this)
 
-        val deviceListItem = SignUpDeviceItem("Other", imei, "Mobile", simNumber, vehicleType)
+        val deviceListItem = SignUpDeviceItem("Other", imei, "Mobile", simNumber, vehicleType, vehicleNumber)
         val credentials = Credentials(userName, password)
         val user = CreateUser(
             "", pinCode, selectedCountry, city, credentials, phoneNumber, name,

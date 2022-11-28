@@ -16,5 +16,7 @@ data class DeviceListItem(
     @SerializedName("referenceId")
     val referenceId: String = "",
     @SerializedName("deviceId")
-    val deviceId: String = ""
+    val deviceId: String = "",
+    @SerializedName("vehicleNumber")
+    val vehicleNumber: String? = ""
 )

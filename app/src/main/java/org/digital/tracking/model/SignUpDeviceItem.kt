@@ -14,6 +14,8 @@ data class SignUpDeviceItem(
     val simNumber: String = "",
     @SerializedName("vehicleType")
     val vehicleType: String = "",
+    @SerializedName("vehicleNumber")
+    val vehicleNumber: String = "",
     @SerializedName("referenceId")
     val referenceId: String = Constants.DEVICE_REFERENCE_ID
 )

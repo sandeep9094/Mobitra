@@ -18,11 +18,12 @@ object PayloadHelper {
 
     }
 
-    fun addNewDevicePayload(imei: String, simNumber: String, vehicleType: String, device: String): JsonObject {
+    fun addNewDevicePayload(imei: String, simNumber: String, vehicleType: String, vehicleNumber: String, device: String): JsonObject {
         val payload = JsonObject()
         payload.addProperty("imei", imei)
         payload.addProperty("simNumber", simNumber)
         payload.addProperty("vehicleType", vehicleType)
+        payload.addProperty("vehicleNumber", vehicleNumber)
         payload.addProperty("device", device)
         payload.addProperty("deviceType", "Electronic")
         payload.addProperty("referenceId", Constants.DEVICE_REFERENCE_ID)

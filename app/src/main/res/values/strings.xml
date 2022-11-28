@@ -296,5 +296,7 @@
     <string name="success_message_password_change">Password changed successfully</string>
     <string name="generate_reset_password_otp">Generate Reset Password OTP</string>
     <string name="total_distance_colon">Total Distance:</string>
+    <string name="vehicle_registration_number_required">Vehicle Registration Number*</string>
+    <string name="error_message_invalid_vehicle_registration_number">Invalid Vehicle Registration Number</string>
 
 </resources>

@@ -45,6 +45,10 @@ object UserCacheManager {
         return deviceList
     }
 
+    fun getDeviceFromImei(deviceImei: String): DeviceListItem? {
+        return deviceList.find { it.imei == deviceImei }
+    }
+
     fun getDeviceImeiList(): List<String> {
         return imeiList
     }

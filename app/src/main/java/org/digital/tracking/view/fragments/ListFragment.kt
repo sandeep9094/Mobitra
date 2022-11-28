@@ -134,7 +134,7 @@ class ListFragment : BaseFragment(), VehicleListAdapter.Listener {
         val vehicleList = VehicleRepository.getVehicleList()
         binding.recyclerView.adapter = VehicleListAdapter(vehicleList, this, apolloClient)
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        binding.recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+//        binding.recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
     }
 
 }

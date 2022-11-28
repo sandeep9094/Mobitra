@@ -55,6 +55,13 @@ class AddDeviceActivity : BaseActivity(), View.OnClickListener {
             return
         }
 
+        val vehicleNumber = binding.vehicleNumberEditText.text.toString().trim()
+        if (vehicleNumber.isEmpty()) {
+            binding.vehicleNumberEditText.error = getString(R.string.error_message_invalid_vehicle_registration_number)
+            binding.vehicleNumberEditText.requestFocus()
+            return
+        }
+
         val selectedVehiclePosition = binding.vehicleTypeSpinner.selectedItemPosition
         val vehicleTypeList = resources.getStringArray(R.array.spinner_vehicle_types_items)
         val vehicleType = vehicleTypeList[selectedVehiclePosition]
@@ -73,7 +80,7 @@ class AddDeviceActivity : BaseActivity(), View.OnClickListener {
 
         val selectedDevice = "Other"
 
-        viewModel.addDevice(imei, simNumber, vehicleType, selectedDevice)
+        viewModel.addDevice(imei, simNumber, vehicleType, vehicleNumber, selectedDevice)
     }
 
     private fun setupObservers() {

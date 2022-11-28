@@ -25,9 +25,9 @@ class AddDeviceViewModel @Inject constructor(
 
     val addDeviceApiResult: MutableLiveData<ApiResult<Boolean>> = MutableLiveData()
 
-    fun addDevice(imei: String, simNumber: String, vehicleType: String, device: String) {
+    fun addDevice(imei: String, simNumber: String, vehicleType: String, vehicleNumber: String, device: String) {
         addDeviceApiResult.value = ApiResult.Loading
-        val payload = PayloadHelper.addNewDevicePayload(imei, simNumber, vehicleType, device)
+        val payload = PayloadHelper.addNewDevicePayload(imei, simNumber, vehicleType, vehicleNumber, device)
         val call = apiService.addDevice(sharedPrefs.userId, payload)
         call.enqueue(object : Callback<AddDeviceResponse> {
             override fun onResponse(call: Call<AddDeviceResponse>, response: Response<AddDeviceResponse>) {
