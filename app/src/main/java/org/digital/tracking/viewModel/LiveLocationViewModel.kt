@@ -78,14 +78,14 @@ class LiveLocationViewModel @Inject constructor(
     }
 
     fun pushDummyLocation(vehicleNumber: String) {
-        val locations = MapsDummyRepository.getReceiveLocationData(vehicleNumber)
-        viewModelScope.launch {
-            locations.forEach {
-                newLocation.postValue(it)
-                Timber.tag("LiveLocationActivity").d("pushDummyLocation: ${it.latitude},${it.longitude}")
-                delay(3000)
-            }
-        }
+//        val locations = MapsDummyRepository.getReceiveLocationData(vehicleNumber)
+//        viewModelScope.launch {
+//            locations.forEach {
+//                newLocation.postValue(it)
+//                Timber.tag("LiveLocationActivity").d("pushDummyLocation: ${it.latitude},${it.longitude}")
+//                delay(3000)
+//            }
+//        }
     }
 
 }

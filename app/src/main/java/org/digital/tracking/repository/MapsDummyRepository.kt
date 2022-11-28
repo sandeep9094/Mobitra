@@ -4,8 +4,8 @@ import com.mobitra.tracking.ReceiveLocationSubscription
 
 object MapsDummyRepository {
 
-    fun getHistoryLocationData(vehicleNumber: String): ArrayList<ReceiveLocationSubscription.ReceiveLocation> {
-        val list = ArrayList<ReceiveLocationSubscription.ReceiveLocation>()
+//    fun getHistoryLocationData(vehicleNumber: String): ArrayList<ReceiveLocationSubscription.ReceiveLocation> {
+//        val list = ArrayList<ReceiveLocationSubscription.ReceiveLocation>()
 //        list.add(
 //            ReceiveLocationSubscription.ReceiveLocation(
 //                "", "", 31.69010,74.97333, "", "", 0
@@ -227,13 +227,13 @@ object MapsDummyRepository {
 //            )
 //        )
 //
-        return list
-    }
+//        return list
+//    }
 
     //
 //
-    fun getReceiveLocationData(vehicleNumber: String): ArrayList<ReceiveLocationSubscription.ReceiveLocation> {
-        val list = ArrayList<ReceiveLocationSubscription.ReceiveLocation>()
+//    fun getReceiveLocationData(vehicleNumber: String): ArrayList<ReceiveLocationSubscription.ReceiveLocation> {
+//        val list = ArrayList<ReceiveLocationSubscription.ReceiveLocation>()
 //        list.add(
 //            ReceiveLocationSubscription.ReceiveLocation(
 //                "", "", 31.69010,74.97333, "", "", 0.0, 0,0.0
@@ -455,6 +455,6 @@ object MapsDummyRepository {
 //            )
 //        )
 
-        return list
-    }
+//        return list
+//    }
 }

@@ -79,7 +79,17 @@ class HaltReportFragment : ReportsBaseFragment() {
             val haltReportMapFrequency = report?.haltReport?.groupingBy { it?.currentDate }?.eachCount()
             report?.haltReport?.forEach { it ->
                 val haltsFrequency: Int = haltReportMapFrequency?.get(it?.currentDate) ?: 0
-                haltReport.add(HaltReport(report.vehicleNum, it?.currentDate, it?.currentTime, it?.latitude, it?.longitude, haltsFrequency))
+                haltReport.add(
+                    HaltReport(
+                        report.IMEINumber ?: "",
+                        report.vehicleNum,
+                        it?.currentDate,
+                        it?.currentTime,
+                        it?.latitude,
+                        it?.longitude,
+                        haltsFrequency
+                    )
+                )
             }
         }
         val distinctReport = haltReport.distinctBy { it.vehicleNumber }

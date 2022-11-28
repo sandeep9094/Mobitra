@@ -93,7 +93,6 @@ class PlaceRenderer(
         val vehicleStatus = getLastLocation.getVehicleStatus()
         intent.putExtra(Constants.INTENT_KEY_VEHICLE_IMEI, getLastLocation?.IMEINumber)
         intent.putExtra(Constants.INTENT_KEY_VEHICLE_NUMBER, vehicleNumber)
-        intent.putExtra(Constants.INTENT_KEY_VEHICLE_NUMBER, vehicleNumber)
         intent.putExtra(Constants.INTENT_KEY_LAST_LAT, lat)
         intent.putExtra(Constants.INTENT_KEY_LAST_LONG, long)
         intent.putExtra(Constants.INTENT_KEY_VEHICLE_SPEED, getLastLocation?.speed)

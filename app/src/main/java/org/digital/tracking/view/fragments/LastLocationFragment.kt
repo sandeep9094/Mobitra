@@ -83,13 +83,14 @@ class LastLocationFragment : ReportsBaseFragment() {
             locations.forEach { location ->
                 Timber.d("Location : ${location?.vehicleNum ?: ""}")
                 location?.let {
+                    val imei = location.IMEINumber ?: ""
                     val vehicleNum = location.vehicleNum ?: ""
                     val currentDate = location.currentDate ?: ""
                     val currentTime = location.currentTime ?: ""
                     val address = "Lat: ${location.latitude}, Long: ${location.longitude}"
                     val lat = location.latitude
                     val long = location.longitude
-                    lastLocationsReport.add(LastLocationReport(vehicleNum, currentDate, currentTime, address, lat, long))
+                    lastLocationsReport.add(LastLocationReport(imei, vehicleNum, currentDate, currentTime, address, lat, long))
                 }
             }
             initReport(lastLocationsReport)

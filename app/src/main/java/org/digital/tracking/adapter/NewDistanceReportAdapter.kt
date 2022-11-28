@@ -8,6 +8,7 @@ import com.mobitra.tracking.ReportsQuery
 import org.digital.tracking.R
 import org.digital.tracking.databinding.AdapterDistanceReportItemBinding
 import org.digital.tracking.model.CustomDistanceReport
+import org.digital.tracking.repository.VehicleRepository
 import org.digital.tracking.utils.getCompleteAddressString
 import org.digital.tracking.utils.getReadableDateAndTime
 import org.digital.tracking.utils.makeGone
@@ -46,7 +47,7 @@ class NewDistanceReportAdapter(
                 } else {
                     binding.dateTimeTextView.text = getReadableDateAndTime(report.startPoint.currentDate, report.startPoint.currentTime)
                 }
-                binding.vehicleNumberTextView.text = report.vehicleNumber
+                binding.vehicleNumberTextView.text = VehicleRepository.getVehicleNumber(report.imeiNumber ?: "")
                 binding.addressTextView.text = binding.root.context.getCompleteAddressString(
                     report.startPoint.latitude,
                     report.startPoint.longitude
@@ -61,7 +62,7 @@ class NewDistanceReportAdapter(
                 } else {
                     binding.dateTimeTextView.text = getReadableDateAndTime(report.endPoint.currentDate, report.endPoint.currentTime)
                 }
-                binding.vehicleNumberTextView.text = report.vehicleNumber
+                binding.vehicleNumberTextView.text = VehicleRepository.getVehicleNumber(report.imeiNumber ?: "")
                 binding.addressTextView.text = binding.root.context.getCompleteAddressString(
                     report.endPoint.latitude,
                     report.endPoint.longitude

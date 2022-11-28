@@ -10,6 +10,7 @@ import com.mobitra.tracking.StopageReportQuery
 import org.digital.tracking.R
 import org.digital.tracking.databinding.AdapterOverSpeedReportItemBinding
 import org.digital.tracking.databinding.AdapterStopageReportItemBinding
+import org.digital.tracking.repository.VehicleRepository
 import org.digital.tracking.utils.*
 
 class StopageReportAdapter(
@@ -46,7 +47,7 @@ class StopageReportAdapter(
             binding.averageSpeedTextView.text = "${report.avgSpeed.formatDoubleValue()}"
             binding.maxSpeedTextView.text = "${report.maxSpeed.formatDoubleValue()}"
             binding.totalStopTextView.text = "${report.totalStops?.toInt() ?: 0}"
-            binding.vehicleNumberTextView.text = report.vehicleNum
+            binding.vehicleNumberTextView.text = VehicleRepository.getVehicleNumber(report.IMEINumber ?: "")
             binding.imeiNumber.text = report.IMEINumber
         }
 

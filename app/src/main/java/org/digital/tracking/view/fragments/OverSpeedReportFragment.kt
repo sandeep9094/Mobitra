@@ -83,6 +83,7 @@ class OverSpeedReportFragment : ReportsBaseFragment() {
             report?.overSpeedReport?.forEach { it ->
                 overSpeedReport.add(
                     OverSpeedReport(
+                        report.IMEINumber,
                         report.vehicleNum,
                         it?.currentDate,
                         it?.currentTime,

@@ -10,7 +10,14 @@ class PlacesReader {
         val vehicles = VehicleRepository.getVehicleList()
         vehicles.forEach { vehicle ->
             if (vehicle?.latitude != null && vehicle.longitude != null) {
-                mapsPlaces.add(Place(vehicle.vehicleNum ?: "Unknown", vehicle.IMEINumber ?: "", vehicle.latitude, vehicle.longitude))
+                mapsPlaces.add(
+                    Place(
+                        VehicleRepository.getVehicleNumber(vehicle.IMEINumber ?: ""),
+                        vehicle.IMEINumber ?: "",
+                        vehicle.latitude,
+                        vehicle.longitude
+                    )
+                )
             }
         }
         Timber.d("PlacesReader: mapsPlaces : ${mapsPlaces}")

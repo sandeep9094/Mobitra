@@ -20,6 +20,7 @@ import org.digital.tracking.databinding.AdapterVehicleItemWithIconsBinding
 import org.digital.tracking.maps.MapUtils
 import org.digital.tracking.model.ApiResult
 import org.digital.tracking.model.VehicleModel
+import org.digital.tracking.repository.VehicleRepository
 import org.digital.tracking.repository.cache.UserCacheManager
 import org.digital.tracking.utils.*
 
@@ -51,9 +52,7 @@ class VehicleListAdapter(
                 binding.root.makeGone()
             }
             binding.imageView.makeVisible()
-            val deviceVehicleNumber: String? = UserCacheManager.getDeviceFromImei(vehicle?.IMEINumber ?: "")?.vehicleNumber
-            val vehicleNumber: String = deviceVehicleNumber ?: (vehicle?.vehicleNum ?: "")
-            binding.vehicleNumber.text = vehicleNumber
+            binding.vehicleNumber.text = VehicleRepository.getVehicleNumber(vehicle?.IMEINumber ?: "")
             binding.addressTextView.text = binding.addressTextView.context.getCompleteAddressString(vehicle?.latitude, vehicle?.longitude)
             binding.lastContact.text = getReadableDateAndTime(vehicle?.currentDate, vehicle?.currentTime)
             binding.speedTextView.text = vehicle?.speed.getSpeedString()

@@ -53,7 +53,7 @@ class ListFragment : BaseFragment(), VehicleListAdapter.Listener {
     override fun onVehicleReplayClick(vehicle: LastLocationsQuery.LastLocation?) {
         val intent = Intent(context, HistoryViewActivity::class.java)
         intent.putExtra(Constants.INTENT_KEY_TITLE, getString(R.string.title_replay_view))
-        intent.putExtra(Constants.INTENT_KEY_VEHICLE_NUMBER, vehicle?.vehicleNum)
+        intent.putExtra(Constants.INTENT_KEY_VEHICLE_NUMBER, VehicleRepository.getVehicleNumber(vehicle?.vehicleNum ?: ""))
         intent.putExtra(Constants.INTENT_KEY_VEHICLE_IMEI, vehicle?.IMEINumber)
         intent.putExtra(Constants.INTENT_KEY_LIVE_LOCATIONS_TYPE, Constants.INTENT_KEY_LIVE_LOCATIONS_TYPE_REPLAY)
         context.navigateToActivity(intent)
@@ -80,7 +80,7 @@ class ListFragment : BaseFragment(), VehicleListAdapter.Listener {
         }
         val intent = Intent(context, LiveLocationActivity::class.java)
         intent.putExtra(Constants.INTENT_KEY_VEHICLE_IMEI, vehicle.IMEINumber)
-        intent.putExtra(Constants.INTENT_KEY_VEHICLE_NUMBER, vehicle.vehicleNum)
+        intent.putExtra(Constants.INTENT_KEY_VEHICLE_NUMBER, VehicleRepository.getVehicleNumber(vehicle.vehicleNum ?: ""))
         intent.putExtra(Constants.INTENT_KEY_LAST_LAT, vehicle.latitude)
         intent.putExtra(Constants.INTENT_KEY_LAST_LONG, vehicle.longitude)
         intent.putExtra(Constants.INTENT_KEY_VEHICLE_SPEED, vehicle.speed)

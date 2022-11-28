@@ -9,6 +9,7 @@ import com.mobitra.tracking.ReportsQuery
 import org.digital.tracking.R
 import org.digital.tracking.databinding.AdapterOverSpeedReportItemBinding
 import org.digital.tracking.model.OverSpeedReport
+import org.digital.tracking.repository.VehicleRepository
 import org.digital.tracking.utils.*
 
 class OverSpeedReportAdapter(
@@ -35,7 +36,7 @@ class OverSpeedReportAdapter(
                 binding.reportLayout.makeGone()
                 return
             }
-            binding.vehicleNumberTextView.text = report.vehicleNumber
+            binding.vehicleNumberTextView.text = VehicleRepository.getVehicleNumber(report.imeiNumber ?: "")
             binding.speedTextView.text = "${report.speed?.getSpeedString()}"
             binding.dateTimeTextView.text = getReadableDateAndTime(report.date, report.time)
             binding.addressTextView.text = binding.root.context.getCompleteAddressString(report.latitude, report.longitude)

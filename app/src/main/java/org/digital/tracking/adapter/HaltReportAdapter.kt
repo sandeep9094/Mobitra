@@ -8,6 +8,7 @@ import com.mobitra.tracking.LastLocationsQuery
 import org.digital.tracking.R
 import org.digital.tracking.databinding.AdapterHaltReportItemBinding
 import org.digital.tracking.model.HaltReport
+import org.digital.tracking.repository.VehicleRepository
 import org.digital.tracking.utils.*
 
 class HaltReportAdapter(
@@ -36,7 +37,7 @@ class HaltReportAdapter(
                 return
             }
             binding.dateTimeTextView.text = getReadableDateAndTime(haltReport.date, haltReport.time)
-            binding.vehicleNumberTextView.text = haltReport.vehicleNumber
+            binding.vehicleNumberTextView.text = VehicleRepository.getVehicleNumber(haltReport.imeiNumber)
             binding.haltsCountTextView.text = "${haltReport.halts ?: 0}"
             binding.addressTextView.text = binding.root.context.getCompleteAddressString(haltReport.latitude, haltReport.longitude)
         }

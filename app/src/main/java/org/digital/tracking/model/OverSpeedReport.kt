@@ -1,6 +1,7 @@
 package org.digital.tracking.model
 
 data class OverSpeedReport(
+    val imeiNumber: String?,
     val vehicleNumber: String?,
     val date: String?,
     val time: String?,

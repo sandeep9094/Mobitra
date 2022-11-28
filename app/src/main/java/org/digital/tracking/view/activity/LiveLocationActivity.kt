@@ -25,6 +25,7 @@ import org.digital.tracking.bindingAdapter.*
 import org.digital.tracking.databinding.ActivityLiveLocationBinding
 import org.digital.tracking.maps.MapUtils
 import org.digital.tracking.model.MapData
+import org.digital.tracking.repository.VehicleRepository
 import org.digital.tracking.utils.*
 import org.digital.tracking.viewModel.LiveLocationViewModel
 import timber.log.Timber
@@ -316,7 +317,7 @@ class LiveLocationActivity : BaseActivity(), OnMapReadyCallback {
             val intent = Intent(this, HistoryViewActivity::class.java)
             intent.putExtra(Constants.INTENT_KEY_TITLE, getString(R.string.title_replay_view))
             intent.putExtra(Constants.INTENT_KEY_VEHICLE_IMEI, vehicleImei)
-            intent.putExtra(Constants.INTENT_KEY_VEHICLE_NUMBER, vehicleNumber)
+            intent.putExtra(Constants.INTENT_KEY_VEHICLE_NUMBER, VehicleRepository.getVehicleNumber(vehicleImei))
             intent.putExtra(Constants.INTENT_KEY_LIVE_LOCATIONS_TYPE, Constants.INTENT_KEY_LIVE_LOCATIONS_TYPE_REPLAY)
             navigateToActivity(intent)
         }
@@ -328,7 +329,7 @@ class LiveLocationActivity : BaseActivity(), OnMapReadyCallback {
     }
 
     private fun setupVehicleInfo(vehicle: ReceiveLocationSubscription.ReceiveLocation) {
-        binding.vehicleInfo.vehicleNumber.text = vehicle.vehicleNum ?: ""
+        binding.vehicleInfo.vehicleNumber.text = vehicleNumber
         binding.vehicleInfo.addressTextView.text = getCompleteAddressString(vehicle.latitude, vehicle.longitude)
         binding.vehicleInfo.lastContact.text = getReadableDateAndTime(vehicle.currentDate, vehicle.currentTime)
         binding.vehicleInfo.speedTextView.text = vehicle.speed.getSpeedString()
@@ -374,7 +375,7 @@ class LiveLocationActivity : BaseActivity(), OnMapReadyCallback {
             val intent = Intent(this, HistoryViewActivity::class.java)
             intent.putExtra(Constants.INTENT_KEY_TITLE, getString(R.string.title_replay_view))
             intent.putExtra(Constants.INTENT_KEY_VEHICLE_IMEI, vehicle.tags?.IMEINumber)
-            intent.putExtra(Constants.INTENT_KEY_VEHICLE_NUMBER, vehicle.vehicleNum)
+            intent.putExtra(Constants.INTENT_KEY_VEHICLE_NUMBER, VehicleRepository.getVehicleNumber(vehicle.vehicleNum ?: ""))
             intent.putExtra(Constants.INTENT_KEY_LIVE_LOCATIONS_TYPE, Constants.INTENT_KEY_LIVE_LOCATIONS_TYPE_REPLAY)
             navigateToActivity(intent)
         }
