@@ -1,5 +1,6 @@
 package org.digital.tracking.viewModel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,6 +19,7 @@ import org.digital.tracking.model.ApiResult
 import org.digital.tracking.model.DailyDistanceReportResponse
 import org.digital.tracking.model.DailyReport
 import org.digital.tracking.utils.*
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -106,13 +108,17 @@ class ReportsViewModel @Inject constructor(
             }
             try {
                 val responseString = Gson().toJson(response.data)
+                Log.d("Reports", "Daily Distance Report: ${responseString}")
                 val reports = Gson().fromJson(responseString, DailyDistanceReportResponse::class.java)
                 if (reports.dailyReport.isNullOrEmpty()) {
+                    Log.d("Reports", "Daily Distance Report isNullOrEmpty: ${responseString}")
                     dailyDistanceReportResult.value = ApiResult.Success(emptyList())
                     return@launch
                 }
+                Log.d("Reports", "Daily Distance Report: ${responseString}")
                 dailyDistanceReportResult.value = ApiResult.Success(reports.dailyReport)
             } catch (exception: Exception) {
+                Log.d("Reports", "Daily Distance Exception: ${exception}")
                 dailyDistanceReportResult.value = ApiResult.Success(emptyList())
             }
 

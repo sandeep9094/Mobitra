@@ -1,8 +1,9 @@
 package org.digital.tracking.model
 
-
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+@Keep
 data class DailyReport(
     @SerializedName("startDateTime")
     val startDateTime: String = "",
@@ -12,9 +13,9 @@ data class DailyReport(
     val endDateTime: String = ""
 )
 
-
+@Keep
 data class DailyDistanceReportResponse(
-    @SerializedName("dailyReport")
+    @SerializedName("a")
     val dailyReport: List<DailyReport>?
 )
 
