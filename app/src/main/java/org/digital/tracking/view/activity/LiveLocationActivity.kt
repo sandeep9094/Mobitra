@@ -375,7 +375,7 @@ class LiveLocationActivity : BaseActivity(), OnMapReadyCallback {
             val intent = Intent(this, HistoryViewActivity::class.java)
             intent.putExtra(Constants.INTENT_KEY_TITLE, getString(R.string.title_replay_view))
             intent.putExtra(Constants.INTENT_KEY_VEHICLE_IMEI, vehicle.tags?.IMEINumber)
-            intent.putExtra(Constants.INTENT_KEY_VEHICLE_NUMBER, VehicleRepository.getVehicleNumber(vehicle.vehicleNum ?: ""))
+            intent.putExtra(Constants.INTENT_KEY_VEHICLE_NUMBER, VehicleRepository.getVehicleNumber(vehicle.tags?.IMEINumber ?: ""))
             intent.putExtra(Constants.INTENT_KEY_LIVE_LOCATIONS_TYPE, Constants.INTENT_KEY_LIVE_LOCATIONS_TYPE_REPLAY)
             navigateToActivity(intent)
         }

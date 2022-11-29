@@ -43,10 +43,11 @@
         <activity
             android:name=".auth.SignUpEmailActivity"
             android:exported="false"
-            android:screenOrientation="portrait" /> <!-- MobiTra UAT Key -->
-        <!-- <meta-data -->
-        <!-- android:name="com.google.android.geo.API_KEY" -->
-        <!-- android:value="AIzaSyDf_CQG-iKl9f3zDQZjbB6fezgHp9f-VZ8" /> -->
+            android:screenOrientation="portrait" />
+        <!-- MobiTra UAT Key -->
+        <!--         <meta-data-->
+        <!--         android:name="com.google.android.geo.API_KEY"-->
+        <!--         android:value="AIzaSyDf_CQG-iKl9f3zDQZjbB6fezgHp9f-VZ8" />-->
         <!-- MobiTra Live Key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
