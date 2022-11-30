@@ -17,13 +17,13 @@ object MapUtils {
         PlayStoreUtil.shareLink(context, locationLink)
     }
 
-    fun moveMarkerSmoothly(marker: Marker?, newLatLng: LatLng): ValueAnimator {
+    fun moveMarkerSmoothly(marker: Marker?, newLatLng: LatLng, animationDuration: Long = 30 * 1000): ValueAnimator {
         val animator = ValueAnimator.ofFloat(0f, 100f)
         marker?.let {
             val deltaLatitude = doubleArrayOf(newLatLng.latitude - marker.position.latitude)
             val deltaLongitude = newLatLng.longitude - marker.position.longitude
             val prevStep = floatArrayOf(0f)
-            animator.duration = 1 * 1000
+            animator.duration = animationDuration
             animator.addUpdateListener { animation ->
                 val deltaStep = (animation.animatedValue as Float - prevStep[0]).toDouble()
                 prevStep[0] = animation.animatedValue as Float

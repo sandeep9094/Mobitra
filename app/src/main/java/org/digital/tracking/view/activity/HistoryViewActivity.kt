@@ -292,8 +292,9 @@ class HistoryViewActivity : BaseActivity(), OnMapReadyCallback, View.OnClickList
             } else {
                 destinationMarker?.setAnchor(MapUtils.MAP_MARKER_ANCHOR_CENTRE_X_AXIS, MapUtils.MAP_MARKER_ANCHOR_CENTRE_Y_AXIS)
                 destinationMarker?.rotation = MapUtils.getLocationBearing(bearingLastLocation, destinationLocation)
-                destinationMarker?.position = destinationLocation
-//                MapUtils.moveMarkerSmoothly(destinationMarker, destinationLocation).start()
+//                destinationMarker?.position = destinationLocation
+                val markerAnimationDuration = viewModel.replayViewSpeed
+                MapUtils.moveMarkerSmoothly(destinationMarker, destinationLocation, markerAnimationDuration).start()
             }
             destinationMarker?.showInfoWindow()
             bearingLastLocation = destinationLocation
