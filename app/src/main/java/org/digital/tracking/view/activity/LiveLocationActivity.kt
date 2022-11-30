@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.AsyncTask
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -45,6 +44,7 @@ class LiveLocationActivity : BaseActivity(), OnMapReadyCallback {
     private var lastContactTime: String? = ""
     private var lastGsmSignal: Double? = 0.0
     private var lastGpsStatus = Constants.GPS_FIXED_STATE_OFF
+    private var bearingLastLocation: LatLng? = null
 
     private var vehicleRunningStatus: String = ""
     private var vehicleStopStatusWithTime: String = ""
@@ -183,15 +183,22 @@ class LiveLocationActivity : BaseActivity(), OnMapReadyCallback {
         try {
             val originLocation = LatLng(lastLatitude!!, lastLongitude!!)
             val destinationLocation = LatLng(destinationLatitude!!, destinationLongitude!!)
+            if (bearingLastLocation == null) {
+                bearingLastLocation = originLocation
+            }
             if (destinationMarker == null) {
-//                val color = ContextCompat.getColor(this, R.color.colorPrimary)
                 val destinationMarkerIcon = BitmapHelper.vectorToBitmap(this, markerIconDrawable)
                 val destinationMarkerOptions =
                     MarkerOptions().position(destinationLocation).icon(destinationMarkerIcon).title(vehicleNumber)
+                val bearing = MapUtils.getLocationBearing(bearingLastLocation, destinationLocation)
+                destinationMarkerOptions.rotation(bearing)
+                destinationMarkerOptions.anchor(MapUtils.MAP_MARKER_ANCHOR_CENTRE_X_AXIS, MapUtils.MAP_MARKER_ANCHOR_CENTRE_Y_AXIS)
                 destinationMarker = googleMap?.addMarker(destinationMarkerOptions)
             } else {
-//                destinationMarker?.position = destinationLocation
-                MapUtils.moveMarkerSmoothly(destinationMarker, destinationLocation).start()
+                destinationMarker?.setAnchor(MapUtils.MAP_MARKER_ANCHOR_CENTRE_X_AXIS, MapUtils.MAP_MARKER_ANCHOR_CENTRE_Y_AXIS)
+                destinationMarker?.rotation = MapUtils.getLocationBearing(bearingLastLocation, destinationLocation)
+                destinationMarker?.position = destinationLocation
+//                MapUtils.moveMarkerSmoothly(destinationMarker, destinationLocation).start()
             }
             destinationMarker?.showInfoWindow()
             val directionsUrl = getDirectionURL(originLocation, destinationLocation, mapsApiKey)

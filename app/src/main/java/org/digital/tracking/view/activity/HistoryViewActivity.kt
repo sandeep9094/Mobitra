@@ -46,6 +46,7 @@ class HistoryViewActivity : BaseActivity(), OnMapReadyCallback, View.OnClickList
     private var destinationMarker: Marker? = null
     private var mapsZoomLevel = Constants.MAP_ZOOM_LEVEL_BTW_CITY_AND_STREETS_14
     private var liveLocationsType = Constants.INTENT_KEY_LIVE_LOCATIONS_TYPE_HISTORY
+    private var bearingLastLocation: LatLng? = null
 
     @Inject
     @Named("mapsApiKey")
@@ -154,24 +155,6 @@ class HistoryViewActivity : BaseActivity(), OnMapReadyCallback, View.OnClickList
             animateCamera(zoom)
         }
     }
-
-//    private fun vehicleListDialog() {
-//        val vehicleList: ArrayList<String> = ArrayList()
-//        VehicleRepository.getVehicleNumberList().forEach { vehicleNum ->
-//            vehicleNum.let {
-//                vehicleList.add(it)
-//            }
-//        }
-//        val arrayAdapter: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, vehicleList)
-//        val builder = AlertDialog.Builder(this)
-//        builder.setTitle("Select Vehicle")
-//
-//        builder.setSingleChoiceItems(arrayAdapter, -1) { dialog, which ->
-//            fetchVehicleLocations(vehicleList[which])
-//            dialog.dismiss()
-//        }
-//        builder.create().show()
-//    }
 
     private fun vehicleListDialog() {
         val vehicleList = ArrayList<String>()
@@ -295,17 +278,26 @@ class HistoryViewActivity : BaseActivity(), OnMapReadyCallback, View.OnClickList
         try {
             val originLocation = LatLng(lastLatitude!!, lastLongitude!!)
             val destinationLocation = LatLng(destinationLatitude!!, destinationLongitude!!)
+            if (bearingLastLocation == null) {
+                bearingLastLocation = originLocation
+            }
             if (destinationMarker == null) {
-//                val color = ContextCompat.getColor(this, R.color.colorPrimary)
                 val destinationMarkerIcon = BitmapHelper.vectorToBitmap(this, R.drawable.car_red)
                 val destinationMarkerOptions =
                     MarkerOptions().position(destinationLocation).icon(destinationMarkerIcon).title(vehicleNumber)
+                val bearing = MapUtils.getLocationBearing(bearingLastLocation, destinationLocation)
+                destinationMarkerOptions.rotation(bearing)
+                destinationMarkerOptions.anchor(MapUtils.MAP_MARKER_ANCHOR_CENTRE_X_AXIS, MapUtils.MAP_MARKER_ANCHOR_CENTRE_Y_AXIS)
                 destinationMarker = googleMap?.addMarker(destinationMarkerOptions)
             } else {
-//                destinationMarker?.position = destinationLocation
-                MapUtils.moveMarkerSmoothly(destinationMarker, destinationLocation).start()
+                destinationMarker?.setAnchor(MapUtils.MAP_MARKER_ANCHOR_CENTRE_X_AXIS, MapUtils.MAP_MARKER_ANCHOR_CENTRE_Y_AXIS)
+                destinationMarker?.rotation = MapUtils.getLocationBearing(bearingLastLocation, destinationLocation)
+                destinationMarker?.position = destinationLocation
+//                MapUtils.moveMarkerSmoothly(destinationMarker, destinationLocation).start()
             }
             destinationMarker?.showInfoWindow()
+            bearingLastLocation = destinationLocation
+
             if (enableRoute) {
                 val directionsUrl = getDirectionURL(originLocation, destinationLocation, mapsApiKey)
                 GetDirection(directionsUrl).execute()

@@ -1,13 +1,16 @@
 package org.digital.tracking.maps
 
 import android.animation.ValueAnimator
-import android.app.Activity
 import android.content.Context
+import android.location.Location
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import org.digital.tracking.utils.PlayStoreUtil
 
 object MapUtils {
+
+    const val MAP_MARKER_ANCHOR_CENTRE_X_AXIS = 0.5f
+    const val MAP_MARKER_ANCHOR_CENTRE_Y_AXIS = 0.5f
 
     fun shareLocationLink(context: Context, latitude: Double?, longitude: Double?) {
         val locationLink = "https://maps.google.com/maps?q=loc:" + String.format("%f,%f", latitude, longitude)
@@ -34,4 +37,25 @@ object MapUtils {
         return animator
     }
 
+    fun getLocationBearing(startLocation: LatLng?, destinationLocation: LatLng?): Float {
+        if (startLocation == null) {
+            return 0f
+        }
+        if (destinationLocation == null) {
+            return 0f
+        }
+
+        val location = Location("startLocation")
+        location.apply {
+            longitude = startLocation.longitude
+            latitude = startLocation.latitude
+        }
+
+        val bearingToLocation = Location("destinationLocation")
+        bearingToLocation.apply {
+            longitude = destinationLocation.longitude
+            latitude = destinationLocation.latitude
+        }
+        return location.bearingTo(bearingToLocation)
+    }
 }
