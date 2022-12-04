@@ -47,7 +47,7 @@ object Constants {
     const val MAP_ZOOM_LEVEL_BTW_CITY_AND_STREETS = 13f
     const val MAP_ZOOM_LEVEL_BTW_CITY_AND_STREETS_14 = 14f
     const val MAP_ZOOM_LEVEL_STREETS = 15f
-    const val MAP_ZOOM_LEVEL_DRIVING = 17f
+    const val MAP_ZOOM_LEVEL_DRIVING = 16f
     const val MAP_ZOOM_LEVEL_BUILDINGS = 20f
 
     const val VEHICLE_STATUS_KEY_IDLE = "idle"

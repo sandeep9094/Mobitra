@@ -10,6 +10,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
@@ -126,7 +127,7 @@ class LiveLocationActivity : BaseActivity(), OnMapReadyCallback {
         } else {
             originMarker?.position = deviceLastLocation
         }
-        originMarker?.showInfoWindow()
+//        originMarker?.showInfoWindow()
         googleMap?.apply {
             moveCamera(camera)
             animateCamera(zoom)
@@ -153,6 +154,7 @@ class LiveLocationActivity : BaseActivity(), OnMapReadyCallback {
                 lastLongitude = newLocation.longitude
                 markFirstPosition(lastLatitude, lastLongitude)
             } else {
+                originMarker?.remove()
                 drawRoute(newLocation.latitude, newLocation.longitude)
             }
         }
@@ -198,11 +200,12 @@ class LiveLocationActivity : BaseActivity(), OnMapReadyCallback {
                 destinationMarker?.setAnchor(MapUtils.MAP_MARKER_ANCHOR_CENTRE_X_AXIS, MapUtils.MAP_MARKER_ANCHOR_CENTRE_Y_AXIS)
                 destinationMarker?.rotation = MapUtils.getLocationBearing(bearingLastLocation, destinationLocation)
                 MapUtils.moveMarkerSmoothly(destinationMarker, destinationLocation).start()
+                val directionsUrl = getDirectionURL(originLocation, destinationLocation, mapsApiKey)
+                GetDirection(directionsUrl).execute()
             }
-            destinationMarker?.showInfoWindow()
-            val directionsUrl = getDirectionURL(originLocation, destinationLocation, mapsApiKey)
-            GetDirection(directionsUrl).execute()
-            googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(destinationLocation, Constants.MAP_ZOOM_LEVEL_DRIVING))
+            val markerPosition = destinationMarker?.position ?: destinationLocation
+            googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(markerPosition, Constants.MAP_ZOOM_LEVEL_DRIVING))
+//            googleMap?.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
         } catch (exception: Exception) {
             Timber.d("Exception Draw Route : $exception")
         }

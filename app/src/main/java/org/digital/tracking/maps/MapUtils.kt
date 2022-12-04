@@ -58,4 +58,24 @@ object MapUtils {
         }
         return location.bearingTo(bearingToLocation)
     }
+
+    fun midPoint(firstLatLng: LatLng, secondLatLng: LatLng): LatLng {
+        var lat1 = firstLatLng.latitude
+        var lon1 = firstLatLng.longitude
+        var lat2 = secondLatLng.latitude
+        val dLon = Math.toRadians(secondLatLng.longitude - lon1)
+        lat1 = Math.toRadians(lat1)
+        lat2 = Math.toRadians(lat2)
+        lon1 = Math.toRadians(lon1)
+        val Bx = Math.cos(lat2) * Math.cos(dLon)
+        val By = Math.cos(lat2) * Math.sin(dLon)
+        val lat3 = Math.atan2(Math.sin(lat1) + Math.sin(lat2), Math.sqrt((Math.cos(lat1) + Bx) * (Math.cos(lat1) + Bx) + By * By))
+        val lon3 = lon1 + Math.atan2(By, Math.cos(lat1) + Bx)
+        return LatLng(lat3, lon3)
+    }
+
+    fun defaultMarkerOptions() {
+        //TODO move marker options into this wrapper
+    }
+
 }
