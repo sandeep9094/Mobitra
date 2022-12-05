@@ -11,6 +11,12 @@ object VehicleRepository {
     private var vehiclesMapWithStatus: Map<String, List<LastLocationsQuery.LastLocation?>> = HashMap()
     private var vehicleList: List<LastLocationsQuery.LastLocation?> = ArrayList()
 
+    fun destroy() {
+        vehicleNumberHashMap.clear()
+        vehicleList = ArrayList()
+        vehiclesMapWithStatus = HashMap()
+    }
+
     fun setVehicleList(list: List<LastLocationsQuery.LastLocation?>) {
         val nonNullList = list.filterNotNull()
         vehicleList = nonNullList.distinctBy { it.IMEINumber }.filterNot { it.vehicleNum.isNullOrEmpty() }

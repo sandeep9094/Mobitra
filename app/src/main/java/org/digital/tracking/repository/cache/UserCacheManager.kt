@@ -3,6 +3,7 @@ package org.digital.tracking.repository.cache
 import org.digital.tracking.manager.SharedPrefs
 import org.digital.tracking.model.DeviceListItem
 import org.digital.tracking.model.User
+import org.digital.tracking.repository.VehicleRepository
 
 
 object UserCacheManager {
@@ -62,6 +63,7 @@ object UserCacheManager {
 
     fun removeUserSession(sharedPrefs: SharedPrefs) {
         destroy()
+        VehicleRepository.destroy()
         sharedPrefs.clearAllKeys()
     }
 
