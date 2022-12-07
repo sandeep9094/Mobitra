@@ -139,9 +139,9 @@ class LastLocationFragment : ReportsBaseFragment() {
                 }
                 val fromDate = fromDateEditText.text.toString().formatDateForServer(isStartDate = true)
                 val toDate = toDateEditText.text.toString().formatDateForServer()
-                Timber.d("VehicleFilter  Selected: ${vehicleList[position]}, from: $fromDate, to: $toDate")
                 val selectedVehicleImei = vehicleImeiList[position]
                 vehicleSelected(selectedVehicleImei, fromDate, toDate)
+                Timber.d("VehicleFilter  Selected: ${vehicleList[position]}[${selectedVehicleImei}], from: $fromDate, to: $toDate")
                 dialog?.dismiss()
             }
             dialog = builder.create()

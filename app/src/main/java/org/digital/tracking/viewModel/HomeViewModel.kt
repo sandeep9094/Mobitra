@@ -70,7 +70,6 @@ class HomeViewModel @Inject constructor(
             override fun onFailure(call: Call<GetUserResponse>, t: Throwable) {
                 deviceListResult.postValue(ApiResult.Error(t.localizedMessage ?: resourceProvider.defaultError))
             }
-
         })
     }
 

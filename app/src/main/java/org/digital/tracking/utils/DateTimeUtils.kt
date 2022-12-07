@@ -235,18 +235,72 @@ fun String?.getReadableDateWithTime(): String {
     }
 }
 
+//fun String?.formatDateForServer(isStartDate: Boolean = false): String {
+//    if (this.isNullOrEmpty()) {
+//        return emptyString
+//    }
+//    val dateSplitArray = this.split("-")
+//    val dateString = "${dateSplitArray[2]}-${dateSplitArray[1]}-${dateSplitArray[0]}"
+//    val calendarTime = Calendar.getInstance().time
+//    val timeFormat = SimpleDateFormat("HH:mm:ss")
+//    val timeString: String = timeFormat.format(calendarTime)
+//    if (isStartDate) {
+//        return "${dateString}T00:00:00.000Z"
+//    }
+//    return "${dateString}T${timeString}.000Z"
+//}
+
+//fun String?.formatDateForServer(isStartDate: Boolean = false): String {
+//    if (this.isNullOrEmpty()) {
+//        return emptyString
+//    }
+//    val dateSplitArray = this.split("-")
+//    val dateString = "${dateSplitArray[2]}-${dateSplitArray[1]}-${dateSplitArray[0]}"
+//    val calendarTime = Calendar.getInstance()
+//    val timeFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+//    timeFormat.timeZone = TimeZone.getTimeZone("UTC")
+//    var timeString = "00:00:00"
+//
+//    timeString = if (isStartDate) {
+//        calendarTime.set(Calendar.HOUR_OF_DAY, 0)
+//        calendarTime.set(Calendar.MINUTE, 0)
+//        calendarTime.set(Calendar.SECOND, 0)
+//        timeFormat.format(calendarTime.time)
+//    } else {
+//        timeFormat.format(calendarTime.time)
+//    }
+//    return timeString
+//}
+
 fun String?.formatDateForServer(isStartDate: Boolean = false): String {
     if (this.isNullOrEmpty()) {
         return emptyString
     }
     val dateSplitArray = this.split("-")
+    //"2022-12-05"
+    //[0] -> 2022    year
+    //[1] -> 12    month
+    //[2] -> 05    day
     val dateString = "${dateSplitArray[2]}-${dateSplitArray[1]}-${dateSplitArray[0]}"
-    val calendarTime = Calendar.getInstance().time
-    val timeFormat = SimpleDateFormat("HH:mm:ss")
-    val timeString: String = timeFormat.format(calendarTime)
-    if (isStartDate) {
-        return "${dateString}T00:00:00.000Z"
+    val calendarTime = Calendar.getInstance()
+    val timeFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+    timeFormat.timeZone = TimeZone.getTimeZone("UTC")
+    var timeString: String
+    val year = dateSplitArray[2].toInt()
+    val month = dateSplitArray[1].toInt()
+    val day = dateSplitArray[0].toInt()
+    calendarTime.set(Calendar.YEAR, year)
+    calendarTime.set(Calendar.MONTH, month - 1)
+    calendarTime.set(Calendar.DAY_OF_MONTH, day)
+    timeString = if (isStartDate) {
+        calendarTime.set(Calendar.HOUR_OF_DAY, 0)
+        calendarTime.set(Calendar.MINUTE, 0)
+        calendarTime.set(Calendar.SECOND, 0)
+        timeFormat.format(calendarTime.time)
+    } else {
+        timeFormat.format(calendarTime.time)
     }
-    return "${dateString}T${timeString}.000Z"
+    return timeString
 }
+
 

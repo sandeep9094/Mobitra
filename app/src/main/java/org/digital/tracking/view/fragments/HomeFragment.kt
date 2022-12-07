@@ -344,7 +344,8 @@ class HomeFragment : BaseFragment(), View.OnClickListener {
                     yearlyAvg
                 }
             }
-            dataMap[it?.vehicleNum ?: ""] = avgData
+            val vehicleNum = VehicleRepository.getVehicleNumber(it?.IMEINumber ?: "")
+            dataMap[vehicleNum] = avgData
         }
         if (dataMap.isEmpty()) {
             return
