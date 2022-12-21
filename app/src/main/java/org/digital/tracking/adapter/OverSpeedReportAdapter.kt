@@ -17,7 +17,9 @@ class OverSpeedReportAdapter(
 ) : RecyclerView.Adapter<OverSpeedReportAdapter.ViewHolder>() {
 
     private lateinit var binding: AdapterOverSpeedReportItemBinding
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
         val layoutInflater = LayoutInflater.from(parent.context)
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.adapter_over_speed_report_item, parent, false)
         return ViewHolder(binding)

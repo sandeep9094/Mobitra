@@ -102,6 +102,7 @@ class OverSpeedReportFragment : ReportsBaseFragment() {
             adapter = OverSpeedReportAdapter(overSpeedReport)
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+            setHasFixedSize(true)
         }
     }
 
