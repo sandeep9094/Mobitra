@@ -4,13 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.mobitra.tracking.LastLocationsQuery
-import com.mobitra.tracking.ReportsQuery
 import org.digital.tracking.R
 import org.digital.tracking.databinding.AdapterDailyDistanceReportItemBinding
-import org.digital.tracking.databinding.AdapterDistanceReportItemBinding
 import org.digital.tracking.model.DailyReport
-import org.digital.tracking.model.DistanceReport
 import org.digital.tracking.utils.*
 
 class DistanceReportAdapter(
@@ -34,10 +30,10 @@ class DistanceReportAdapter(
     inner class ViewHolder(private val binding: AdapterDailyDistanceReportItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bindView(report: DailyReport) {
-            if (report.startDateTime.isEmpty()) {
+            if (report.endDateTime.isEmpty()) {
                 binding.dateTimeTextView.text = nA
             } else {
-                binding.dateTimeTextView.text = report.startDateTime.getReadableDateWithTime()
+                binding.dateTimeTextView.text = report.endDateTime.getReadableDate()
             }
             binding.distanceTextView.text = "${report.totalDistance.getDistanceString()}"
         }

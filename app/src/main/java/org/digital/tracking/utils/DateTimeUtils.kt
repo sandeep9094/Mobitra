@@ -216,19 +216,21 @@ fun getReadableTime(date: String?, time: String?): String {
 }
 
 
-fun String?.getReadableDateWithTime(): String {
+fun String?.getReadableDate(): String {
     if (this == null) {
         return emptyString
     }
     return try {
-        val dateString = this.split("T")[0]
         val OLD_FORMAT = "yyyy-MM-dd"
-        val NEW_FORMAT = "dd MMM yyyy"
+        val DATE_NEW_FORMAT = "dd MMM yyyy"
         val readableDateString: String
-        val sdf = SimpleDateFormat(OLD_FORMAT)
-        val d = sdf.parse(dateString)
-        sdf.applyPattern(NEW_FORMAT)
-        readableDateString = sdf.format(d)
+        val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+        formatter.timeZone = TimeZone.getTimeZone("UTC")
+        val value = formatter.parse(this)
+        val localTimeZone = Calendar.getInstance().timeZone
+        val dateFormatter = SimpleDateFormat(DATE_NEW_FORMAT, Locale.getDefault()) //this format changeable
+        dateFormatter.timeZone = localTimeZone
+        readableDateString = dateFormatter.format(value)
         readableDateString
     } catch (exception: Exception) {
         this
@@ -283,7 +285,7 @@ fun String?.formatDateForServer(isStartDate: Boolean = false): String {
     //[2] -> 05    day
     val dateString = "${dateSplitArray[2]}-${dateSplitArray[1]}-${dateSplitArray[0]}"
     val calendarTime = Calendar.getInstance()
-    val timeFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+    val timeFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'.00Z'")
     timeFormat.timeZone = TimeZone.getTimeZone("UTC")
     var timeString: String
     val year = dateSplitArray[2].toInt()

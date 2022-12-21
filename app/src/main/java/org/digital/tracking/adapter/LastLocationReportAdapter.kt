@@ -10,7 +10,6 @@ import org.digital.tracking.model.LastLocationReport
 import org.digital.tracking.repository.VehicleRepository
 import org.digital.tracking.utils.getCompleteAddressString
 import org.digital.tracking.utils.getReadableDateAndTime
-import org.digital.tracking.utils.getReadableDateWithTime
 
 class LastLocationReportAdapter(
     private val lastLocationReportList: List<LastLocationReport>

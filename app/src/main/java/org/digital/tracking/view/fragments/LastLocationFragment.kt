@@ -81,7 +81,6 @@ class LastLocationFragment : ReportsBaseFragment() {
             lastLocationsReport.clear()
             val locations = response.data?.locations ?: emptyList()
             locations.forEach { location ->
-                Timber.d("Location : ${location?.vehicleNum ?: ""}")
                 location?.let {
                     val imei = location.IMEINumber ?: ""
                     val vehicleNum = location.vehicleNum ?: ""
@@ -141,7 +140,6 @@ class LastLocationFragment : ReportsBaseFragment() {
                 val toDate = toDateEditText.text.toString().formatDateForServer()
                 val selectedVehicleImei = vehicleImeiList[position]
                 vehicleSelected(selectedVehicleImei, fromDate, toDate)
-                Timber.d("VehicleFilter  Selected: ${vehicleList[position]}[${selectedVehicleImei}], from: $fromDate, to: $toDate")
                 dialog?.dismiss()
             }
             dialog = builder.create()

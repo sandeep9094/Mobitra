@@ -30,8 +30,8 @@ android {
         applicationId = "com.mobitra.app"
         minSdk = 21
         targetSdk = 31
-        versionCode = 8
-        versionName = "1.0.8"
+        versionCode = 9
+        versionName = "1.0.10"
         setProperty("archivesBaseName", "Mobitra_v${versionName}")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

@@ -2,6 +2,14 @@ package org.digital.tracking.model
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
+import org.digital.tracking.BuildConfig
+
+val DAILY_REPORT_SERIALIZED_NAME: String = if (BuildConfig.DEBUG) {
+    "dailyReport"
+} else {
+    "a"
+}
+
 
 @Keep
 data class DailyReport(
@@ -15,8 +23,11 @@ data class DailyReport(
 
 @Keep
 data class DailyDistanceReportResponse(
-    @SerializedName("a")
+//    @SerializedName("dailyReport") //Debug
+    @SerializedName("a") //Release
     val dailyReport: List<DailyReport>?
 )
+
+
 
 
