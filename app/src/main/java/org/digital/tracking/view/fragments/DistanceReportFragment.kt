@@ -145,8 +145,8 @@ class DistanceReportFragment : ReportsBaseFragment() {
                 }
                 val fromDate = fromDateEditText.text.toString().formatDateForServer(isStartDate = true)
                 val toDate = toDateEditText.text.toString().formatDateForServer()
-                Timber.d("VehicleFilter  Selected: ${vehicleImeiList[position]}, from: $fromDate, to: $toDate")
                 val selectedVehicleImei = vehicleImeiList[position]
+                Timber.d("VehicleFilter  Selected: $selectedVehicleImei, from: $fromDate, to: $toDate")
                 vehicleSelected(selectedVehicleImei, fromDate, toDate)
                 dialog?.dismiss()
             }

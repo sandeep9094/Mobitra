@@ -36,7 +36,9 @@ class HaltReportAdapter(
                 binding.reportLayout.makeGone()
                 return
             }
-            binding.dateTimeTextView.text = getReadableDateAndTime(haltReport.date, haltReport.time)
+            val fromDate = haltReport.fromDate.getReadableDateFromReportFilters()
+            val toDate = haltReport.toDate.getReadableDateFromReportFilters()
+            binding.dateTimeTextView.text = "${fromDate}\nTo\n$toDate"
             binding.vehicleNumberTextView.text = VehicleRepository.getVehicleNumber(haltReport.imeiNumber)
             binding.haltsCountTextView.text = "${haltReport.halts ?: 0}"
             binding.addressTextView.text = binding.root.context.getCompleteAddressString(haltReport.latitude, haltReport.longitude)

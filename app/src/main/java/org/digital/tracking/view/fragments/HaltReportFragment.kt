@@ -27,6 +27,8 @@ import timber.log.Timber
 @AndroidEntryPoint
 class HaltReportFragment : ReportsBaseFragment() {
 
+    private var reportFromDate: String = ""
+    private var reportToDate: String = ""
     private lateinit var binding: FragmentHaltReportBinding
     private val viewModel by activityViewModels<ReportsViewModel>()
 
@@ -83,8 +85,8 @@ class HaltReportFragment : ReportsBaseFragment() {
                     HaltReport(
                         report.IMEINumber ?: "",
                         report.vehicleNum,
-                        it?.currentDate,
-                        it?.currentTime,
+                        reportFromDate,
+                        reportToDate,
                         it?.latitude,
                         it?.longitude,
                         haltsFrequency
@@ -143,11 +145,11 @@ class HaltReportFragment : ReportsBaseFragment() {
                     showToast("Please select valid date!")
                     return@setOnItemClickListener
                 }
-                val fromDate = fromDateEditText.text.toString().formatDateForServer(isStartDate = true)
-                val toDate = toDateEditText.text.toString().formatDateForServer()
-                Timber.d("VehicleFilter  Selected: ${vehicleList[position]}, from: $fromDate, to: $toDate")
+                reportFromDate = fromDateEditText.text.toString().formatDateForServer(isStartDate = true)
+                reportToDate = toDateEditText.text.toString().formatDateForServer()
+                Timber.d("VehicleFilter  Selected: ${vehicleList[position]}, from: $reportFromDate, to: $reportToDate")
                 val selectedVehicleImei = vehicleImeiList[position]
-                vehicleSelected(selectedVehicleImei, fromDate, toDate)
+                vehicleSelected(selectedVehicleImei, reportFromDate, reportToDate)
                 dialog?.dismiss()
             }
             dialog = builder.create()

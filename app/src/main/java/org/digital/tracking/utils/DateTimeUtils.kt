@@ -1,14 +1,26 @@
 package org.digital.tracking.utils
 
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 
+object DateTimeUtils {
+    // Sometimes time string doesn't have seconds and need to format as HH:mm:ss
+    fun getFormattedTime(time: String?): String {
+        if (time.isNullOrEmpty()) {
+            return emptyString
+        }
+        val splitStringSize = time.split(":").size
+        if (splitStringSize == 3) {
+            return time
+        }
+        return "${time}:00" //append seconds
+    }
+}
 
 fun getTodayDate(isStartDate: Boolean = false): String {
 //    2021-04-30T18:30:00.000Z
     val calendar = Calendar.getInstance()
-//    calendar[Calendar.DATE] = calendar.getMinimum(Calendar.DAY_OF_MONTH)
-//    calendar.add(Calendar.DATE, -1)
     val startDate = calendar.time
     val dateFormat = SimpleDateFormat("yyyy-MM-dd")
     val timeFormat = SimpleDateFormat("HH:mm:ss")
@@ -52,54 +64,6 @@ fun getMonthStartDate(isStartDate: Boolean = true): String {
     return "${date}T${time}.000Z"
 }
 
-fun get7DaysTimestamp(): String {
-//    2021-04-30T18:30:00.000Z
-    val calendar = Calendar.getInstance()
-    calendar.add(Calendar.DATE, -6)
-    val startDate = calendar.time
-    val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-    val timeFormat = SimpleDateFormat("HH:mm:ss")
-    val date: String = dateFormat.format(startDate)
-    val time: String = timeFormat.format(startDate)
-    return "${date}T${time}.000Z"
-}
-
-fun get15DaysTimestamp(): String {
-//    2021-04-30T18:30:00.000Z
-    val calendar = Calendar.getInstance()
-    calendar.add(Calendar.DATE, -14)
-    val startDate = calendar.time
-    val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-    val timeFormat = SimpleDateFormat("HH:mm:ss")
-    val date: String = dateFormat.format(startDate)
-    val time: String = timeFormat.format(startDate)
-    return "${date}T${time}.000Z"
-}
-
-fun get30DaysTimestamp(): String {
-//    2021-04-30T18:30:00.000Z
-    val calendar = Calendar.getInstance()
-    calendar.add(Calendar.DATE, -29)
-    val startDate = calendar.time
-    val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-    val timeFormat = SimpleDateFormat("HH:mm:ss")
-    val date: String = dateFormat.format(startDate)
-    val time: String = timeFormat.format(startDate)
-    return "${date}T${time}.000Z"
-}
-
-fun get60DaysTimestamp(): String {
-//    2021-04-30T18:30:00.000Z
-    val calendar = Calendar.getInstance()
-    calendar.add(Calendar.DATE, -59)
-    val startDate = calendar.time
-    val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-    val timeFormat = SimpleDateFormat("HH:mm:ss")
-    val date: String = dateFormat.format(startDate)
-    val time: String = timeFormat.format(startDate)
-    return "${date}T${time}.000Z"
-}
-
 fun getMonthEndDate(): String {
 //    2021-04-30T18:30:00.000Z
     val calendar = Calendar.getInstance()
@@ -125,30 +89,6 @@ fun getYearStartDate(): String {
     return "${date}T${time}.000Z"
 }
 
-//fun getReadableDateAndTime(date: String?, time: String?): String {
-//    var dateTimeString = "$date $time"
-//    var readableDateString = ""
-//    var readableTimeString = ""
-//    if (date.isNullOrEmpty() || time.isNullOrEmpty()) {
-//        return ""
-//    }
-//    try {
-//        //Format Date
-//        val DATE_OLD_FORMAT = "yyyy-MM-dd"
-//        val DATE_NEW_FORMAT = "dd MMM yyyy"
-//        val sdf = SimpleDateFormat(DATE_OLD_FORMAT, Locale.getDefault())
-//        val d = sdf.parse(date)
-//        sdf.applyPattern(DATE_NEW_FORMAT)
-//        readableDateString = sdf.format(d)
-//        readableTimeString = time
-//
-//    } catch (exception: Exception) {
-//        return dateTimeString
-//    }
-//    dateTimeString = "$readableDateString $readableTimeString"
-//    return dateTimeString
-//}
-
 fun getReadableDateAndTime(date: String?, time: String?): String {
     var dateTimeString = "$date $time"
     if (date.isNullOrEmpty() || time.isNullOrEmpty()) {
@@ -160,7 +100,7 @@ fun getReadableDateAndTime(date: String?, time: String?): String {
         val DATE_NEW_FORMAT = "dd MMM yyyy"
         val formatter = SimpleDateFormat("$DATE_OLD_FORMAT HH:mm:ss", Locale.getDefault())
         formatter.timeZone = TimeZone.getTimeZone("UTC")
-        val value = formatter.parse("$date $time")
+        val value = formatter.parse("$date ${DateTimeUtils.getFormattedTime(time)}")
         val localTimeZone = Calendar.getInstance().timeZone
         val dateFormatter = SimpleDateFormat("$DATE_NEW_FORMAT HH:mm:ss", Locale.getDefault()) //this format changeable
         dateFormatter.timeZone = localTimeZone
@@ -182,7 +122,7 @@ fun getReadableDate(date: String?, time: String?): String {
         val DATE_NEW_FORMAT = "dd MMM yyyy"
         val formatter = SimpleDateFormat("$DATE_OLD_FORMAT HH:mm:ss", Locale.getDefault())
         formatter.timeZone = TimeZone.getTimeZone("UTC")
-        val value = formatter.parse("$date $time")
+        val value = formatter.parse("$date ${DateTimeUtils.getFormattedTime(time)}")
         val localTimeZone = Calendar.getInstance().timeZone
         val dateFormatter = SimpleDateFormat(DATE_NEW_FORMAT, Locale.getDefault()) //this format changeable
         dateFormatter.timeZone = localTimeZone
@@ -221,7 +161,6 @@ fun String?.getReadableDate(): String {
         return emptyString
     }
     return try {
-        val OLD_FORMAT = "yyyy-MM-dd"
         val DATE_NEW_FORMAT = "dd MMM yyyy"
         val readableDateString: String
         val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
@@ -236,43 +175,6 @@ fun String?.getReadableDate(): String {
         this
     }
 }
-
-//fun String?.formatDateForServer(isStartDate: Boolean = false): String {
-//    if (this.isNullOrEmpty()) {
-//        return emptyString
-//    }
-//    val dateSplitArray = this.split("-")
-//    val dateString = "${dateSplitArray[2]}-${dateSplitArray[1]}-${dateSplitArray[0]}"
-//    val calendarTime = Calendar.getInstance().time
-//    val timeFormat = SimpleDateFormat("HH:mm:ss")
-//    val timeString: String = timeFormat.format(calendarTime)
-//    if (isStartDate) {
-//        return "${dateString}T00:00:00.000Z"
-//    }
-//    return "${dateString}T${timeString}.000Z"
-//}
-
-//fun String?.formatDateForServer(isStartDate: Boolean = false): String {
-//    if (this.isNullOrEmpty()) {
-//        return emptyString
-//    }
-//    val dateSplitArray = this.split("-")
-//    val dateString = "${dateSplitArray[2]}-${dateSplitArray[1]}-${dateSplitArray[0]}"
-//    val calendarTime = Calendar.getInstance()
-//    val timeFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-//    timeFormat.timeZone = TimeZone.getTimeZone("UTC")
-//    var timeString = "00:00:00"
-//
-//    timeString = if (isStartDate) {
-//        calendarTime.set(Calendar.HOUR_OF_DAY, 0)
-//        calendarTime.set(Calendar.MINUTE, 0)
-//        calendarTime.set(Calendar.SECOND, 0)
-//        timeFormat.format(calendarTime.time)
-//    } else {
-//        timeFormat.format(calendarTime.time)
-//    }
-//    return timeString
-//}
 
 fun String?.formatDateForServer(isStartDate: Boolean = false): String {
     if (this.isNullOrEmpty()) {
@@ -303,6 +205,26 @@ fun String?.formatDateForServer(isStartDate: Boolean = false): String {
         timeFormat.format(calendarTime.time)
     }
     return timeString
+}
+
+fun String?.getReadableDateFromReportFilters(): String {
+    if (this == null) {
+        return emptyString
+    }
+    return try {
+        val DATE_NEW_FORMAT = "dd MMM yyyy"
+        val readableDateString: String
+        val formatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.00'Z'", Locale.getDefault())
+        formatter.timeZone = TimeZone.getTimeZone("UTC")
+        val value = formatter.parse(this)
+        val localTimeZone = Calendar.getInstance().timeZone
+        val dateFormatter = SimpleDateFormat(DATE_NEW_FORMAT, Locale.getDefault()) //this format changeable
+        dateFormatter.timeZone = localTimeZone
+        readableDateString = dateFormatter.format(value)
+        readableDateString
+    } catch (exception: Exception) {
+        this
+    }
 }
 
 

@@ -31,8 +31,8 @@ object RetrofitManager {
             .addInterceptor(authInterceptor)
             .addInterceptor(logging)
             .connectTimeout(1, TimeUnit.MINUTES)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(15, TimeUnit.SECONDS)
+            .readTimeout(45, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
         return okHttpClientBuilder.build()
     }
 
