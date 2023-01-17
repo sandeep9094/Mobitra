@@ -20,6 +20,19 @@ object RetrofitManager {
         return retrofit.create(ApiService::class.java)
     }
 
+    fun getApiService(): ApiService {
+        val okHttpClientBuilder = OkHttpClient.Builder()
+            .connectTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(45, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+        val retrofit = Retrofit.Builder()
+            .baseUrl(Constants.SERVER_URL_ON_BOARDING_API)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClientBuilder.build())
+            .build()
+        return retrofit.create(ApiService::class.java)
+    }
+
     private fun getOkHttpClient(authInterceptor: AuthorizationInterceptor): OkHttpClient {
         val logging = HttpLoggingInterceptor() // set your desired log level
         if (BuildConfig.DEBUG) {
