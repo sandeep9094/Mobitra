@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.digital.tracking.R
+import org.digital.tracking.api.ApiService
 import org.digital.tracking.api.PayloadHelper
 import org.digital.tracking.api.RetrofitManager
 import org.digital.tracking.di.ResourceProvider
@@ -16,6 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
+    private val apiService: ApiService,
     private val resourceProvider: ResourceProvider
 ) : ViewModel() {
 
@@ -32,7 +34,7 @@ class LoginViewModel @Inject constructor(
     private fun loginImpl(emailOrPhone: String, password: String) {
         loginResult.postValue(ApiResult.Loading)
         val payload = PayloadHelper.loginPayload(emailOrPhone, password)
-        val apiService = RetrofitManager.getApiService()
+//        val apiService = RetrofitManager.getApiService()
         val call = apiService.loginUser(payload)
         call.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {

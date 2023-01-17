@@ -65,6 +65,7 @@ object UserCacheManager {
         destroy()
         VehicleRepository.destroy()
         sharedPrefs.clearAllKeys()
+        sharedPrefs.isUserFirstTime = false
     }
 
 
