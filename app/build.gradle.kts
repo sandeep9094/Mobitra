@@ -4,6 +4,7 @@ plugins {
     kotlin("kapt")
     id("kotlin-parcelize")
     id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
     id("dagger.hilt.android.plugin")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("com.apollographql.apollo3").version("3.6.0")
@@ -30,8 +31,8 @@ android {
         applicationId = "com.mobitra.app"
         minSdk = 21
         targetSdk = 31
-        versionCode = 11
-        versionName = "1.0.11"
+        versionCode = 12
+        versionName = "1.0.12"
         setProperty("archivesBaseName", "Mobitra_v${versionName}")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -96,6 +97,9 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:30.3.1"))
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.android.gms:play-services-safetynet:18.0.1")
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
+
     //GraphQL Apollo Kotlin
     implementation("com.apollographql.apollo3:apollo-runtime:3.6.0")
 

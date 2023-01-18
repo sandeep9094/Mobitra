@@ -48,6 +48,7 @@ class ListFragment : BaseFragment(), VehicleListAdapter.Listener {
         }
 
         setupObserver()
+
     }
 
     override fun onVehicleReplayClick(vehicle: LastLocationsQuery.LastLocation?) {
