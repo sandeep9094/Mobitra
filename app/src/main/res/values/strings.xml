@@ -298,5 +298,6 @@
     <string name="total_distance_colon">Total Distance:</string>
     <string name="vehicle_registration_number_required">Vehicle Registration Number*</string>
     <string name="error_message_invalid_vehicle_registration_number">Invalid Vehicle Registration Number</string>
+    <string name="export_report">Export Report</string>
 
 </resources>

@@ -102,6 +102,8 @@ dependencies {
 
     //GraphQL Apollo Kotlin
     implementation("com.apollographql.apollo3:apollo-runtime:3.6.0")
+    //Jackson CSV
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.14.2")
 
     //Android Testing
     testImplementation("junit:junit:4.13.2")

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.Optional
 import com.apollographql.apollo3.exception.ApolloException
+import com.google.gson.Gson
 import com.mobitra.tracking.LocationsQuery
 import dagger.hilt.android.AndroidEntryPoint
 import org.digital.tracking.R
@@ -45,6 +46,10 @@ class LastLocationFragment : ReportsBaseFragment() {
             vehicleListDialog()
         }
 
+        binding.exportReportIcon.setOnClickListener {
+            val gsonArray = Gson().toJson(lastLocationsReport)
+            exportReports(gsonArray)
+        }
         binding.errorMessage.makeVisible()
 
         showSnackBar(binding.root, "Select vehicle from filters")
@@ -154,5 +159,6 @@ class LastLocationFragment : ReportsBaseFragment() {
         binding.errorMessage.makeGone()
         binding.lastLocationReportRecyclerView.makeGone()
     }
+
 
 }

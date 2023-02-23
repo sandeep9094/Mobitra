@@ -28,15 +28,15 @@ object Constants {
     const val INTENT_KEY_LIVE_LOCATIONS_TYPE_HISTORY = "locationTypeHistory"
 
     //UAT
-//    const val SERVER_URL_ON_BOARDING_API = "https://boarding-api.testmbtrsas.com"
-//    const val GRAPHQL_TRACKING_SERVER_URL = "https://tracking-api.testmbtrsas.com/graphql"
-//    const val GRAPHQL_TRACKING_SOCKET_SERVER_URL = "wss://tracking-api.testmbtrsas.com/graphql"
+    const val SERVER_URL_ON_BOARDING_API = "https://boarding-api.testmbtrsas.com"
+    const val GRAPHQL_TRACKING_SERVER_URL = "https://tracking-api.testmbtrsas.com/graphql"
+    const val GRAPHQL_TRACKING_SOCKET_SERVER_URL = "wss://tracking-api.testmbtrsas.com/graphql"
     //const val GOOGLE_MAPS_API_KEY = "AIzaSyDf_CQG-iKl9f3zDQZjbB6fezgHp9f-VZ8" //TODO uncomment in Manifest
 
     //Production
-    const val SERVER_URL_ON_BOARDING_API = "https://cus-bord.livemtr.com"
-    const val GRAPHQL_TRACKING_SERVER_URL = "https://trk.livemtr.com/graphql"
-    const val GRAPHQL_TRACKING_SOCKET_SERVER_URL = "wss://trk.livemtr.com/graphql"
+//    const val SERVER_URL_ON_BOARDING_API = "https://cus-bord.livemtr.com"
+//    const val GRAPHQL_TRACKING_SERVER_URL = "https://trk.livemtr.com/graphql"
+//    const val GRAPHQL_TRACKING_SOCKET_SERVER_URL = "wss://trk.livemtr.com/graphql"
 ////    const val GOOGLE_MAPS_API_KEY = "AIzaSyAeqIjATMfUG1pnWTTwrp-zVluMpu1Br5A"
 
     const val GRAPHQL_SOCKET_CONNECTION_TIMEOUT = 30 * 1000L //In millis
