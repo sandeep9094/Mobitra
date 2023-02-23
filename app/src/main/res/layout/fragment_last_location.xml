@@ -81,7 +81,8 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/margin_16dp"
             android:clickable="true"
-            app:backgroundTint="@color/color_primary_dark"
+            android:enabled="true"
+            app:backgroundTint="@color/bg_floating_action_button"
             android:contentDescription="@string/export_report"
             android:src="@drawable/baseline_file_download_24" />
 

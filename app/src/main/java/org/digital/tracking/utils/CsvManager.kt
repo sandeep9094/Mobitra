@@ -79,7 +79,7 @@ object CsvManager {
         return jsonObject
     }
 
-    fun writeFile(context: Context, jsonString: String): File {
+    fun writeFile(context: Context, jsonString: String, fileName: String): File {
         val jsonTree = ObjectMapper().readTree(jsonString)
         val csvSchemaBuilder: CsvSchema.Builder = CsvSchema.builder()
         val firstObject = jsonTree.elements().next()
@@ -102,7 +102,7 @@ object CsvManager {
             val mkdirs = filesDir.mkdirs()
             Log.i("CsvWriter", "Directory has been created: $mkdirs")
         }
-        val saveFile = File(filesDir, "Demo.csv")
+        val saveFile = File(filesDir, "${fileName}_${System.currentTimeMillis()}.csv")
         val csvMapper = CsvMapper()
         csvMapper.writerFor(JsonNode::class.java)
             .with(csvSchema)

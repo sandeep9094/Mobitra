@@ -257,6 +257,7 @@
     <string name="error_message_default">Something went wrong!</string>
     <string name="error_message_failed_to_fetch_location">Failed to fetch location</string>
     <string name="error_message_location_permission_required">Location permission is required</string>
+    <string name="error_message_storage_permission_required">Storage permission is required</string>
     <string name="error_message_invalid_vehicle_number">Invalid vehicle number</string>
     <string name="error_message_failed_to_add_new_device">Failed to add new device</string>
     <string name="error_message_failed_to_send_otp">Failed to send reset password OTP</string>
@@ -299,5 +300,6 @@
     <string name="vehicle_registration_number_required">Vehicle Registration Number*</string>
     <string name="error_message_invalid_vehicle_registration_number">Invalid Vehicle Registration Number</string>
     <string name="export_report">Export Report</string>
+    <string name="error_message_reports_are_empty">Reports is empty!, Try after generating report</string>
 
 </resources>

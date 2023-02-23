@@ -17,10 +17,14 @@ import com.apollographql.apollo3.exception.ApolloException
 import com.google.gson.Gson
 import com.mobitra.tracking.LocationsQuery
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import org.digital.tracking.R
 import org.digital.tracking.adapter.LastLocationReportAdapter
 import org.digital.tracking.databinding.FragmentLastLocationBinding
 import org.digital.tracking.model.LastLocationReport
+import org.digital.tracking.model.csv.LastLocationCsvModel
 import org.digital.tracking.repository.VehicleRepository
 import org.digital.tracking.repository.cache.UserCacheManager
 import org.digital.tracking.utils.*
@@ -47,11 +51,22 @@ class LastLocationFragment : ReportsBaseFragment() {
         }
 
         binding.exportReportIcon.setOnClickListener {
-            val gsonArray = Gson().toJson(lastLocationsReport)
-            exportReports(gsonArray)
+            if (lastLocationsReport.isEmpty()) {
+                showToast(getString(R.string.error_message_reports_are_empty))
+                return@setOnClickListener
+            }
+            showToast("Preparing Report to export")
+            viewLifecycleOwner.lifecycleScope.async {
+                Timber.d("startCoroutine----------------------")
+                val responsee = getList(lastLocationsReport)
+                Timber.d("endCoroutine----------------------")
+                val gsonArray = Gson().toJson(responsee)
+                val lastLocationSignEntry = lastLocationsReport.first()
+                val reportName = "${getString(R.string.title_last_location_report)}_${lastLocationSignEntry.imeiNumber}".replace(" ", "_")
+                exportReports(gsonArray, reportName)
+            }
         }
         binding.errorMessage.makeVisible()
-
         showSnackBar(binding.root, "Select vehicle from filters")
     }
 
@@ -158,6 +173,17 @@ class LastLocationFragment : ReportsBaseFragment() {
         binding.progress.makeVisible()
         binding.errorMessage.makeGone()
         binding.lastLocationReportRecyclerView.makeGone()
+    }
+
+    private suspend fun getList(lastLocationsReport: ArrayList<LastLocationReport>): List<LastLocationCsvModel> {
+        val list = ArrayList<LastLocationCsvModel>()
+        lastLocationsReport.forEach {
+            val vehicleNumber = VehicleRepository.getVehicleNumber(it.imeiNumber)
+            val dateTime = getReadableDateAndTime(it.date, it.time)
+            val address = binding.root.context.getCompleteAddressString(it.lat, it.long)
+            list.add(LastLocationCsvModel(it.imeiNumber, vehicleNumber, dateTime, address, it.lat, it.long, it.vehicleNumber))
+        }
+        return list
     }
 
 
