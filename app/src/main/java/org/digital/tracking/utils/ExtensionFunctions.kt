@@ -24,6 +24,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.digital.tracking.R
 import java.util.*
 
@@ -230,4 +234,16 @@ fun Double?.formatDoubleValue(): Double {
     }
     formattedValue = "%.2f".format(this).toDouble()
     return formattedValue
+}
+
+fun <R> CoroutineScope.executeAsyncTask(
+    onPreExecute: () -> Unit,
+    doInBackground: () -> R,
+    onPostExecute: (R) -> Unit
+) = launch {
+    onPreExecute()
+    val result = withContext(Dispatchers.IO) { // runs in background thread without blocking the Main Thread
+        doInBackground()
+    }
+    onPostExecute(result)
 }
