@@ -59,9 +59,9 @@ class VehicleListAdapter(
             binding.movedKmTextView.text = vehicle?.totalDistance.getDistanceString()
             //Ignition Status
             if (vehicle?.ignitionStat?.toInt() == Constants.IGNITION_STAT_ON) {
-                binding.ignitionStatus.setIgnitionStatusIconColor(isIgnitionOn = true)
+                binding.ignitionStatus.setIgnitionStatusIconColor(isIgnitionOn = true, speed = vehicle.speed)
             } else {
-                binding.ignitionStatus.setIgnitionStatusIconColor(isIgnitionOn = false)
+                binding.ignitionStatus.setIgnitionStatusIconColor(isIgnitionOn = false, speed = vehicle?.speed)
             }
 
             val vehicleStatus = vehicle.getVehicleStatus()

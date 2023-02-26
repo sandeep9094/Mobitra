@@ -18,7 +18,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.mobitra.tracking.LastLocationsQuery
 import dagger.hilt.android.AndroidEntryPoint
 import org.digital.tracking.R
-import org.digital.tracking.bindingAdapter.setParkingStatus
 import org.digital.tracking.bindingAdapter.setVehicleStatus
 import org.digital.tracking.databinding.FragmentViewVehicleBinding
 import org.digital.tracking.model.ApiResult

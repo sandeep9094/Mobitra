@@ -67,9 +67,14 @@ class PlaceRenderer(
      */
     override fun onClusterItemRendered(clusterItem: Place, marker: Marker) {
         marker.tag = "${clusterItem.imeiNumber},${clusterItem.vehicleNumber}"
-//        marker.showInfoWindow()
         map.setOnMarkerClickListener {
             val markerTag = it.tag.toString().split(",")
+            if (markerTag.isEmpty()) {
+                return@setOnMarkerClickListener false
+            }
+            if (markerTag.size <= 1) {
+                return@setOnMarkerClickListener false
+            }
             val imeiNumber: String = markerTag[0]
             val vehicleNumber: String = markerTag[1]
             openLiveTracking(imeiNumber, vehicleNumber, it.position.latitude, it.position.longitude)

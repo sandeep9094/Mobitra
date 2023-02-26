@@ -65,7 +65,6 @@ class LastLocationFragment : ReportsBaseFragment() {
                 return@executeAsyncTask response // send data to "onPostExecute"
             }, onPostExecute = {
                 Timber.d("Report: onPostExecute ----------")
-                showToast("Report prepared to share")
                 // ... here "it" is a data returned from "doInBackground"
                 val gsonArray = Gson().toJson(it)
                 val lastLocationSignEntry = lastLocationsReport.first()
@@ -200,7 +199,7 @@ class LastLocationFragment : ReportsBaseFragment() {
             val vehicleNumber = VehicleRepository.getVehicleNumber(it.imeiNumber)
             val dateTime = getReadableDateAndTime(it.date, it.time)
 //            val address = binding.root.context.getCompleteAddressString(it.lat, it.long)
-            list.add(LastLocationCsvModel(it.imeiNumber, vehicleNumber, dateTime, "", it.lat, it.long, it.vehicleNumber))
+            list.add(LastLocationCsvModel(it.imeiNumber, vehicleNumber, dateTime,  it.lat, it.long))
         }
         Timber.d("Report: finished processing")
         return list

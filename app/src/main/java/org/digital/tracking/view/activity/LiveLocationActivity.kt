@@ -296,9 +296,9 @@ class LiveLocationActivity : BaseActivity(), OnMapReadyCallback {
 
         //Ignition Status
         if (vehicleIgnitionStatus?.toInt() == Constants.IGNITION_STAT_ON) {
-            binding.vehicleInfo.ignitionStatus.setIgnitionStatusIconColor(isIgnitionOn = true)
+            binding.vehicleInfo.ignitionStatus.setIgnitionStatusIconColor(isIgnitionOn = true, speed = vehicleSpeed)
         } else {
-            binding.vehicleInfo.ignitionStatus.setIgnitionStatusIconColor(isIgnitionOn = false)
+            binding.vehicleInfo.ignitionStatus.setIgnitionStatusIconColor(isIgnitionOn = false, speed = vehicleSpeed)
         }
 
         //Vehicle Status
@@ -347,9 +347,9 @@ class LiveLocationActivity : BaseActivity(), OnMapReadyCallback {
 
         //Ignition Status
         if (vehicle.ignitionStat?.toInt() == Constants.IGNITION_STAT_ON) {
-            binding.vehicleInfo.ignitionStatus.setIgnitionStatusIconColor(isIgnitionOn = true)
+            binding.vehicleInfo.ignitionStatus.setIgnitionStatusIconColor(isIgnitionOn = true, speed = vehicle.speed)
         } else {
-            binding.vehicleInfo.ignitionStatus.setIgnitionStatusIconColor(isIgnitionOn = false)
+            binding.vehicleInfo.ignitionStatus.setIgnitionStatusIconColor(isIgnitionOn = false, speed = vehicle.speed)
         }
 
         //Vehicle Status

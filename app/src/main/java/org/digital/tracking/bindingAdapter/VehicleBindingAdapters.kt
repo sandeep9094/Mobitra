@@ -14,31 +14,10 @@ import org.digital.tracking.utils.getCompleteAddressString
 import org.digital.tracking.utils.setDrawable
 import org.digital.tracking.utils.setTintColor
 
-@BindingAdapter("app:setParkingStatus")
-fun TextView.setParkingStatus(isVehicleParking: Boolean) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        if (!isVehicleParking) {
-            this.setTextColor(context.getColor(R.color.color_text_secondary))
-            return
-        }
-        this.setTextColor(context.getColor(R.color.color_text_blue))
-    }
-}
-
-@BindingAdapter("app:setIgnitionStatus")
-fun TextView.setIgnitionStatus(isIgnitionOn: Boolean) {
-    if (!isIgnitionOn) {
-        this.text = context.getString(R.string.off)
-        this.background = ContextCompat.getDrawable(context, R.drawable.bg_red)
-        return
-    }
-    this.text = context.getString(R.string.on)
-    this.background = ContextCompat.getDrawable(context, R.drawable.bg_green)
-}
-
-@BindingAdapter("app:setIgnitionStatusIconColor")
-fun ImageView.setIgnitionStatusIconColor(isIgnitionOn: Boolean) {
-    if (!isIgnitionOn) {
+@BindingAdapter(value = ["app:isIgnitionOn", "app:speed"], requireAll = true)
+fun ImageView.setIgnitionStatusIconColor(isIgnitionOn: Boolean, speed: Double?) {
+    val currentSpeed: Int = speed?.toInt() ?: 0
+    if (currentSpeed <= 0 && !isIgnitionOn) {
         this.setTintColor(R.color.vehicle_status_icon_red)
         return
     }
@@ -121,7 +100,6 @@ fun TextView.setVehicleStatusText(status: String) {
         this.text = context.getString(R.string.unknown)
     }
 }
-
 
 @BindingAdapter("app:setVehicleIconStatus")
 fun ImageView.setVehicleIconStatus(status: String) {
