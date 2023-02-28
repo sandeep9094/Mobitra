@@ -26,6 +26,7 @@ import org.digital.tracking.databinding.ActivityLiveLocationBinding
 import org.digital.tracking.maps.MapUtils
 import org.digital.tracking.model.MapData
 import org.digital.tracking.repository.VehicleRepository
+import org.digital.tracking.repository.cache.UserCacheManager
 import org.digital.tracking.utils.*
 import org.digital.tracking.viewModel.LiveLocationViewModel
 import timber.log.Timber
@@ -149,13 +150,16 @@ class LiveLocationActivity : BaseActivity(), OnMapReadyCallback {
             latestUpdatedLatitude = newLocation.latitude
             latestUpdatedLongitude = newLocation.longitude
             setupVehicleInfo(newLocation)
+            val vehicleDeviceInfo = UserCacheManager.getDeviceFromImei(newLocation.tags?.IMEINumber ?: "")
+            val deviceType = vehicleDeviceInfo?.deviceType ?: ""
+            Timber.d("LiveLocation: deviceType: ${deviceType}, imei: ${vehicleDeviceInfo?.imei}")
             if (lastLatitude == null || lastLongitude == null) {
                 lastLatitude = newLocation.latitude
                 lastLongitude = newLocation.longitude
                 markFirstPosition(lastLatitude, lastLongitude)
             } else {
                 originMarker?.remove()
-                drawRoute(newLocation.latitude, newLocation.longitude)
+                drawRoute(newLocation.latitude, newLocation.longitude, deviceType)
             }
         }
     }
@@ -181,7 +185,7 @@ class LiveLocationActivity : BaseActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun drawRoute(destinationLatitude: Double?, destinationLongitude: Double?) {
+    private fun drawRoute(destinationLatitude: Double?, destinationLongitude: Double?, deviceType: String) {
         try {
             val originLocation = LatLng(lastLatitude!!, lastLongitude!!)
             val destinationLocation = LatLng(destinationLatitude!!, destinationLongitude!!)
@@ -199,7 +203,8 @@ class LiveLocationActivity : BaseActivity(), OnMapReadyCallback {
             } else {
                 destinationMarker?.setAnchor(MapUtils.MAP_MARKER_ANCHOR_CENTRE_X_AXIS, MapUtils.MAP_MARKER_ANCHOR_CENTRE_Y_AXIS)
                 destinationMarker?.rotation = MapUtils.getLocationBearing(bearingLastLocation, destinationLocation)
-                MapUtils.moveMarkerSmoothly(destinationMarker, destinationLocation).start()
+                val markerAnimationDuration = MapUtils.getMarkerAnimationDuration(deviceType)
+                MapUtils.moveMarkerSmoothly(destinationMarker, destinationLocation, markerAnimationDuration).start()
                 val directionsUrl = getDirectionURL(originLocation, destinationLocation, mapsApiKey)
                 GetDirection(directionsUrl).execute()
             }

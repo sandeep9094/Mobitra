@@ -12,12 +12,19 @@ object MapUtils {
     const val MAP_MARKER_ANCHOR_CENTRE_X_AXIS = 0.5f
     const val MAP_MARKER_ANCHOR_CENTRE_Y_AXIS = 0.5f
 
+    fun getMarkerAnimationDuration(deviceType: String): Long {
+        if (deviceType.equals("AARYA141", ignoreCase = true)) {
+            return 30 * 1000L
+        }
+        return 0L
+    }
+
     fun shareLocationLink(context: Context, latitude: Double?, longitude: Double?) {
         val locationLink = "https://maps.google.com/maps?q=loc:" + String.format("%f,%f", latitude, longitude)
         PlayStoreUtil.shareLink(context, locationLink)
     }
 
-    fun moveMarkerSmoothly(marker: Marker?, newLatLng: LatLng, animationDuration: Long = 30 * 1000): ValueAnimator {
+    fun moveMarkerSmoothly(marker: Marker?, newLatLng: LatLng, animationDuration: Long): ValueAnimator {
         val animator = ValueAnimator.ofFloat(0f, 100f)
         marker?.let {
             val deltaLatitude = doubleArrayOf(newLatLng.latitude - marker.position.latitude)

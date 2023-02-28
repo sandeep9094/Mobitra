@@ -16,6 +16,7 @@ subscription ReceiveLocation(
         gsmSigStr
         tags {
             IMEINumber
+            __typename
         }
     }
 }

@@ -1,111 +1,111 @@
 #
 directive @cacheControl(
-    maxAge: Int
-    scope: CacheControlScope
+  maxAge: Int
+  scope: CacheControlScope
 ) on FIELD_DEFINITION | OBJECT | INTERFACE
 
 #
 type Query {
-    #
-    _empty: String
+  #
+  _empty: String
 
-    #
-    alert(IMEINumber: String!): Alert
+  #
+  alert(IMEINumber: String!): Alert
 
-    #
-    alerts(IMEINumber: String!): [Alert]
+  #
+  alerts(IMEINumber: String!): [Alert]
 
-    #
-    health(IMEINumber: String!): Health
+  #
+  health(IMEINumber: String!): Health
 
-    #
-    healthReport(IMEINumber: String!): [Health]
+  #
+  healthReport(IMEINumber: String!): [Health]
 
-    #
-    locations(
-        vehicleNum: String
-        IMEINumber: String
-        startDateTime: String!
-        endDateTime: String!
-    ): [Location]
+  #
+  locations(
+    vehicleNum: String
+    IMEINumber: String
+    startDateTime: String!
+    endDateTime: String!
+  ): [Location]
 
-    #
-    lastLocation(
-        vehicleNums: [String]
-        IMEINumbers: [String]
-        startDateTime: String!
-        endDateTime: String!
-    ): [Location]
+  #
+  lastLocation(
+    vehicleNums: [String]
+    IMEINumbers: [String]
+    startDateTime: String!
+    endDateTime: String!
+  ): [Location]
 
-    #
-    vehiclesWeeklyAverageRunning(IMEINumber: String): [VehicleAvgRes]
+  #
+  vehiclesWeeklyAverageRunning(IMEINumber: String): [VehicleAvgRes]
 
-    #
-    vehiclesAverageRunning(IMEINumber: String): [VehicleAvgRes]
+  #
+  vehiclesAverageRunning(IMEINumber: String): [VehicleAvgRes]
 
-    #
-    reports(
-        IMEINumber: String
-        startDateTime: String!
-        endDateTime: String!
-    ): [Reports]
+  #
+  reports(
+    IMEINumber: String
+    startDateTime: String!
+    endDateTime: String!
+  ): [Reports]
 
-    #
-    stoppageReport(
-        IMEINumber: String
-        startDateTime: String!
-        endDateTime: String!
-    ): [StoppageReport]
+  #
+  stoppageReport(
+    IMEINumber: String
+    startDateTime: String!
+    endDateTime: String!
+  ): [StoppageReport]
 
-    #
-    queryRunner(
-        IMEINumber: String
-        startDateTime: String
-        endDateTime: String
-    ): JSON
+  #
+  queryRunner(
+    IMEINumber: String
+    startDateTime: String
+    endDateTime: String
+  ): JSON
 
-    #
-    dailyReport(
-        IMEINumber: String
-        startDateTime: String
-        endDateTime: String
-    ): JSON
+  #
+  dailyReport(
+    IMEINumber: String
+    startDateTime: String
+    endDateTime: String
+  ): JSON
 
-    #
-    Login(IMEINumber: String!): Login
+  #
+  Login(IMEINumber: String!): Login
 
-    #
-    Logins(IMEINumber: String!): [Login]
+  #
+  Logins(IMEINumber: String!): [Login]
 }
 
 #
 type Alert {
-    #
-    packetType: String
+  #
+  packetType: String
 
-    #
-    alertId: Int
+  #
+  alertId: Int
 
-    #
-    IMEINumber: String
+  #
+  IMEINumber: String
 
-    #
-    mode: Float
+  #
+  mode: Float
 
-    #
-    mobNumOrIp: String
+  #
+  mobNumOrIp: String
 
-    #
-    currentDate: String
+  #
+  currentDate: String
 
-    #
-    currentTime: String
+  #
+  currentTime: String
 
-    #
-    paramChange: String
+  #
+  paramChange: String
 
-    #
-    additionalFields: JSON
+  #
+  additionalFields: JSON
 }
 
 #
@@ -113,383 +113,383 @@ scalar JSON
 
 #
 type Health {
-    #
-    header: String
+  #
+  header: String
 
-    #
-    firmwareVersion: String
+  #
+  firmwareVersion: String
 
-    #
-    IMEINumber: String
+  #
+  IMEINumber: String
 
-    #
-    currentDate: String
+  #
+  currentDate: String
 
-    #
-    currentTime: String
+  #
+  currentTime: String
 
-    #
-    lowBatThresh: Float
+  #
+  lowBatThresh: Float
 
-    #
-    memoPerc: Float
+  #
+  memoPerc: Float
 
-    #
-    ignitionDataIntv: Float
+  #
+  ignitionDataIntv: Float
 
-    #
-    normDataIntv: Float
+  #
+  normDataIntv: Float
 
-    #
-    digitalIo: Float
+  #
+  digitalIo: Float
 
-    #
-    analogIo: Float
+  #
+  analogIo: Float
 
-    #
-    additionalField: JSON
+  #
+  additionalField: JSON
 }
 
 #
 type Location {
-    #
-    packetHeader: String
+  #
+  packetHeader: String
 
-    #
-    vendorId: String
+  #
+  vendorId: String
 
-    #
-    firmwareVersion: String
+  #
+  firmwareVersion: String
 
-    #
-    packetType: String
+  #
+  packetType: String
 
-    #
-    alertID: Int
+  #
+  alertID: Int
 
-    #
-    packetStatus: String
+  #
+  packetStatus: String
 
-    #
-    IMEINumber: String
+  #
+  IMEINumber: String
 
-    #
-    vehicleNum: String
+  #
+  vehicleNum: String
 
-    #
-    gpsFixState: Int
+  #
+  gpsFixState: Int
 
-    #
-    time: String
+  #
+  time: String
 
-    #
-    currentDate: String
+  #
+  currentDate: String
 
-    #
-    currentTime: String
+  #
+  currentTime: String
 
-    #
-    latitude: Float
+  #
+  latitude: Float
 
-    #
-    latitudeDir: String
+  #
+  latitudeDir: String
 
-    #
-    longitude: Float
+  #
+  longitude: Float
 
-    #
-    longitudeDir: String
+  #
+  longitudeDir: String
 
-    #
-    speed: Float
+  #
+  speed: Float
 
-    #
-    headDegree: Float
+  #
+  headDegree: Float
 
-    #
-    numSatellites: Int
+  #
+  numSatellites: Int
 
-    #
-    altitude: Float
+  #
+  altitude: Float
 
-    #
-    PDOP: Float
+  #
+  PDOP: Float
 
-    #
-    HDOP: Float
+  #
+  HDOP: Float
 
-    #
-    nwOpName: String
+  #
+  nwOpName: String
 
-    #
-    ignitionStat: Float
+  #
+  ignitionStat: Float
 
-    #
-    mainsPowerStat: Float
+  #
+  mainsPowerStat: Float
 
-    #
-    mainIpVolt: Float
+  #
+  mainIpVolt: Float
 
-    #
-    intBatteryVolt: Float
+  #
+  intBatteryVolt: Float
 
-    #
-    sOSStat: Float
+  #
+  sOSStat: Float
 
-    #
-    gsmSigStr: Float
+  #
+  gsmSigStr: Float
 
-    #
-    MCC: Float
+  #
+  MCC: Float
 
-    #
-    MNC: Float
+  #
+  MNC: Float
 
-    #
-    LAC: String
+  #
+  LAC: String
 
-    #
-    cellId: String
+  #
+  cellId: String
 
-    #
-    NMR: String
+  #
+  NMR: String
 
-    #
-    digiIp: Float
+  #
+  digiIp: Float
 
-    #
-    digiOpStat: Float
+  #
+  digiOpStat: Float
 
-    #
-    analog1: Float
+  #
+  analog1: Float
 
-    #
-    analog2: Float
+  #
+  analog2: Float
 
-    #
-    frameNum: Float
+  #
+  frameNum: Float
 
-    #
-    emergencyStat: String
+  #
+  emergencyStat: String
 
-    #
-    tamperAlert: String
+  #
+  tamperAlert: String
 
-    #
-    lac1: String
+  #
+  lac1: String
 
-    #
-    cellId1: String
+  #
+  cellId1: String
 
-    #
-    cellIdSig1: String
+  #
+  cellIdSig1: String
 
-    #
-    LAC2: String
+  #
+  LAC2: String
 
-    #
-    cellId2: String
+  #
+  cellId2: String
 
-    #
-    cellIdSig2: String
+  #
+  cellIdSig2: String
 
-    #
-    LAC3: String
+  #
+  LAC3: String
 
-    #
-    cellId3: String
+  #
+  cellId3: String
 
-    #
-    cellIdSig3: String
+  #
+  cellIdSig3: String
 
-    #
-    LAC4: String
+  #
+  LAC4: String
 
-    #
-    cellId4: String
+  #
+  cellId4: String
 
-    #
-    cellIdSig4: String
+  #
+  cellIdSig4: String
 
-    #
-    digiIpstat1: String
+  #
+  digiIpstat1: String
 
-    #
-    digiIpstat2: String
+  #
+  digiIpstat2: String
 
-    #
-    digiIpstat3: String
+  #
+  digiIpstat3: String
 
-    #
-    digiIpstat4: String
+  #
+  digiIpstat4: String
 
-    #
-    digiOpStat1: String
+  #
+  digiOpStat1: String
 
-    #
-    digiOpStat2: String
+  #
+  digiOpStat2: String
 
-    #
-    odometer: String
+  #
+  odometer: String
 
-    #
-    tags: Tag
+  #
+  tags: Tag
 
-    #
-    additionalFields: JSON
+  #
+  additionalFields: JSON
 
-    #
-    totalDistance: Float
+  #
+  totalDistance: Float
 }
 
 #
 type Tag {
-    #
-    IMEINumber: String
+  #
+  IMEINumber: String
 }
 
 #
 type VehicleAvgRes {
-    #
-    IMEINumber: String
+  #
+  IMEINumber: String
 
-    #
-    vehicleNum: String
+  #
+  vehicleNum: String
 
-    #
-    weeklyKms: [Float]
+  #
+  weeklyKms: [Float]
 
-    #
-    monthlyKms: [Float]
+  #
+  monthlyKms: [Float]
 
-    #
-    yearlyKms: [Float]
+  #
+  yearlyKms: [Float]
 }
 
 #
 type Reports {
-    #
-    IMEINumber: String
+  #
+  IMEINumber: String
 
-    #
-    vehicleNum: String
+  #
+  vehicleNum: String
 
-    #
-    startPoint: Location
+  #
+  startPoint: Location
 
-    #
-    endPoint: Location
+  #
+  endPoint: Location
 
-    #
-    overSpeedReport: [Location]
+  #
+  overSpeedReport: [Location]
 
-    #
-    haltReport: [Location]
+  #
+  haltReport: [Location]
 }
 
 #
 type StoppageReport {
-    #
-    IMEINumber: String
+  #
+  IMEINumber: String
 
-    #
-    vehicleNum: String
+  #
+  vehicleNum: String
 
-    #
-    totalRunningTime: Float
+  #
+  totalRunningTime: Float
 
-    #
-    totalIdealTime: Float
+  #
+  totalIdealTime: Float
 
-    #
-    totalStopTime: Float
+  #
+  totalStopTime: Float
 
-    #
-    totalDistance: Float
+  #
+  totalDistance: Float
 
-    #
-    avgSpeed: Float
+  #
+  avgSpeed: Float
 
-    #
-    maxSpeed: Float
+  #
+  maxSpeed: Float
 
-    #
-    totalStops: Float
+  #
+  totalStops: Float
 }
 
 #
 type Login {
-    #
-    vehicleNo: String
+  #
+  vehicleNo: String
 
-    #
-    IMEINumber: String
+  #
+  IMEINumber: String
 
-    #
-    firmwareVersion: String
+  #
+  firmwareVersion: String
 
-    #
-    protocolVersion: String
+  #
+  protocolVersion: String
 
-    #
-    currentDate: String
+  #
+  currentDate: String
 
-    #
-    currentTime: String
+  #
+  currentTime: String
 
-    #
-    gPSFIX: String
+  #
+  gPSFIX: String
 
-    #
-    latitude: Float
+  #
+  latitude: Float
 
-    #
-    latitudeDir: String
+  #
+  latitudeDir: String
 
-    #
-    longitudeDir: String
+  #
+  longitudeDir: String
 
-    #
-    altitude: Float
+  #
+  altitude: Float
 
-    #
-    speed: Float
+  #
+  speed: Float
 
-    #
-    additionalFields: JSON
+  #
+  additionalFields: JSON
 }
 
 #
 type Mutation {
-    #
-    _empty: String
+  #
+  _empty: String
 }
 
 #
 type Subscription {
-    #
-    _empty: String
+  #
+  _empty: String
 
-    #
-    receiveAlert(IMEINumber: String): Alert
+  #
+  receiveAlert(IMEINumber: String): Alert
 
-    #
-    receiveHealth(IMEINumber: String): Health
+  #
+  receiveHealth(IMEINumber: String): Health
 
-    #
-    receiveLocation(vehicleNum: String, IMEINumber: String): Location
+  #
+  receiveLocation(vehicleNum: String, IMEINumber: String): Location
 
-    #
-    receiveLogin(IMEINumber: String): Login
+  #
+  receiveLogin(IMEINumber: String): Login
 }
 
 #
 enum CacheControlScope {
-    #
-    PUBLIC
+  #
+  PUBLIC
 
-    #
-    PRIVATE
+  #
+  PRIVATE
 }
 
 # The `Upload` scalar type represents a file upload.
