@@ -13,6 +13,7 @@ import org.digital.tracking.utils.makeGone
 import org.digital.tracking.utils.makeVisible
 import org.digital.tracking.utils.showToast
 import org.digital.tracking.viewModel.AddDeviceViewModel
+import timber.log.Timber
 
 @AndroidEntryPoint
 class AddDeviceActivity : BaseActivity(), View.OnClickListener {
@@ -78,7 +79,8 @@ class AddDeviceActivity : BaseActivity(), View.OnClickListener {
             return
         }
 
-        val selectedDevice = "Other"
+        val selectedDeviceTypeList = resources.getStringArray(R.array.spinner_select_device_items)
+        val selectedDevice = selectedDeviceTypeList[selectedDevicePosition]
 
         viewModel.addDevice(imei, simNumber, vehicleType, vehicleNumber, selectedDevice)
     }

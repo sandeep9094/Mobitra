@@ -135,7 +135,10 @@ class SignUpActivity : BaseActivity(), View.OnClickListener {
             binding.selectDeviceSpinner.requestFocus()
             return
         }
-//        val selectedDevice = deviceTypeList[selectedDevicePosition - 1]
+
+        val selectedDeviceTypeList = resources.getStringArray(R.array.spinner_select_device_items)
+        val deviceType = selectedDeviceTypeList[selectedDevicePosition]
+
 
         val userTypePosition = binding.userTypeSpinner.selectedItemPosition
         val userTypeList = resources.getStringArray(R.array.spinner_user_type_items)
@@ -226,7 +229,7 @@ class SignUpActivity : BaseActivity(), View.OnClickListener {
         }
         binding.confirmPasswordEditText.hideKeyboard(this)
 
-        val deviceListItem = SignUpDeviceItem("Other", imei, "Mobile", simNumber, vehicleType, vehicleNumber)
+        val deviceListItem = SignUpDeviceItem(deviceType, imei, "Mobile", simNumber, vehicleType, vehicleNumber)
         val credentials = Credentials(userName, password)
         val user = CreateUser(
             "", pinCode, selectedCountry, city, credentials, phoneNumber, name,
