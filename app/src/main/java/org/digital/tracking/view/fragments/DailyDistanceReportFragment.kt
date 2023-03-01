@@ -11,8 +11,10 @@ import android.widget.EditText
 import android.widget.ListView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.mobitra.tracking.LastLocationsQuery
 import com.mobitra.tracking.ReportsQuery
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,6 +32,7 @@ import timber.log.Timber
 @AndroidEntryPoint
 class DailyDistanceReportFragment : ReportsBaseFragment() {
 
+    private var dailyReportList: List<DailyReport> = ArrayList<DailyReport>()
     private val viewModel by activityViewModels<ReportsViewModel>()
     private lateinit var binding: FragmentDailyDistanceReportBinding
 
@@ -44,6 +47,7 @@ class DailyDistanceReportFragment : ReportsBaseFragment() {
             vehicleListDialog()
         }
 
+        initExportReport()
         setupObserver()
         showSnackBar(binding.root, "Select vehicle from filters")
     }
@@ -70,7 +74,8 @@ class DailyDistanceReportFragment : ReportsBaseFragment() {
                     binding.progress.makeGone()
                     binding.error.makeGone()
                     binding.recyclerView.makeVisible()
-                    initReport(reportList)
+                    dailyReportList = reportList
+                    initReport(dailyReportList)
                 }
             }
         }
@@ -137,6 +142,27 @@ class DailyDistanceReportFragment : ReportsBaseFragment() {
     private fun vehicleSelected(selectedVehicleImei: String, fromDate: String, toDate: String) {
         viewModel.getDailyDistanceReport(selectedVehicleImei, fromDate, toDate)
 
+    }
+
+
+    private fun initExportReport() {
+        binding.exportReportIcon.setOnClickListener {
+//            if (dailyReportList.isEmpty()) {
+//                showToast(getString(R.string.error_message_reports_are_empty))
+//                return@setOnClickListener
+//            }
+//            viewLifecycleOwner.lifecycleScope.executeAsyncTask(onPreExecute = {
+//                showToast("Preparing Report to export")
+//            }, doInBackground = {
+//                val response = getExportList(dailyReportList)
+//                return@executeAsyncTask response
+//            }, onPostExecute = {
+//                val gsonArray = Gson().toJson(it)
+//                val imeiNumber = dailyReportList.first().imeiNumber ?: ""
+//                val reportName = "${getString(R.string.title_distance_report)}_${imeiNumber}".replace(" ", "_")
+//                exportReports(gsonArray, reportName)
+//            })
+        }
     }
 
 

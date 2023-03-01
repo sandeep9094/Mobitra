@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".view.fragments.DailyDistanceReportFragment">
 
@@ -83,6 +84,20 @@
             android:text="@string/error_message_no_list_found"
             android:visibility="gone"
             tools:visibility="visible" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/exportReportIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/margin_16dp"
+            android:clickable="true"
+            android:visibility="gone"
+            android:enabled="true"
+            app:backgroundTint="@color/bg_floating_action_button"
+            android:contentDescription="@string/export_report"
+            android:src="@drawable/baseline_file_download_24" />
+
 
     </FrameLayout>
 

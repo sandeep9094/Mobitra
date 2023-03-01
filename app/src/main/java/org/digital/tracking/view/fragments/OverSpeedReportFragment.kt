@@ -9,15 +9,20 @@ import android.widget.EditText
 import android.widget.ListView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.mobitra.tracking.ReportsQuery
 import dagger.hilt.android.AndroidEntryPoint
 import org.digital.tracking.R
 import org.digital.tracking.adapter.OverSpeedReportAdapter
 import org.digital.tracking.databinding.FragmentOverspeedReportBinding
 import org.digital.tracking.model.ApiResult
+import org.digital.tracking.model.CustomDistanceReport
 import org.digital.tracking.model.OverSpeedReport
+import org.digital.tracking.model.csv.DistanceReportCsvModel
+import org.digital.tracking.model.csv.OverSpeedReportCsvModel
 import org.digital.tracking.repository.VehicleRepository
 import org.digital.tracking.utils.*
 import org.digital.tracking.viewModel.ReportsViewModel
@@ -26,6 +31,7 @@ import timber.log.Timber
 @AndroidEntryPoint
 class OverSpeedReportFragment : ReportsBaseFragment() {
 
+    var overSpeedReport: ArrayList<OverSpeedReport> = ArrayList()
     private lateinit var binding: FragmentOverspeedReportBinding
     private val viewModel by activityViewModels<ReportsViewModel>()
 
@@ -40,6 +46,7 @@ class OverSpeedReportFragment : ReportsBaseFragment() {
             vehicleListDialog()
         }
 
+        initExportReport()
         setupObserver()
         showSnackBar(binding.root, "Select vehicle from filters")
 
@@ -78,7 +85,7 @@ class OverSpeedReportFragment : ReportsBaseFragment() {
     }
 
     private fun initReport(list: List<ReportsQuery.Report?>) {
-        val overSpeedReport: ArrayList<OverSpeedReport> = ArrayList()
+        overSpeedReport = ArrayList()
         list.forEach { report ->
             report?.overSpeedReport?.forEach { it ->
                 overSpeedReport.add(
@@ -153,6 +160,38 @@ class OverSpeedReportFragment : ReportsBaseFragment() {
 
     private fun vehicleSelected(selectedVehicleImei: String, fromDate: String, toDate: String) {
         viewModel.getReport(selectedVehicleImei, fromDate, toDate)
+    }
+
+
+    private fun initExportReport() {
+        binding.exportReportIcon.setOnClickListener {
+            if (overSpeedReport.isEmpty()) {
+                showToast(getString(R.string.error_message_reports_are_empty))
+                return@setOnClickListener
+            }
+            viewLifecycleOwner.lifecycleScope.executeAsyncTask(onPreExecute = {
+                showToast("Preparing Report to export")
+            }, doInBackground = {
+                val response = getExportList(overSpeedReport)
+                return@executeAsyncTask response
+            }, onPostExecute = {
+                val gsonArray = Gson().toJson(it)
+                val imeiNumber = overSpeedReport.first().imeiNumber ?: ""
+                val reportName = "${getString(R.string.title_over_speed_report)}_${imeiNumber}".replace(" ", "_")
+                exportReports(gsonArray, reportName)
+            })
+        }
+    }
+
+    private fun getExportList(reportList: ArrayList<OverSpeedReport>): List<OverSpeedReportCsvModel> {
+        val list = ArrayList<OverSpeedReportCsvModel>()
+        reportList.forEachIndexed { index, it ->
+            val vehicleNumber = VehicleRepository.getVehicleNumber(it.imeiNumber ?: "")
+            val dateTime = getReadableDateAndTime(it.date, it.time)
+            val speed = "${it.speed?.getSpeedString()}"
+            list.add(OverSpeedReportCsvModel(it.imeiNumber ?: "", vehicleNumber, dateTime, it.latitude, it.longitude, speed))
+        }
+        return list
     }
 
 }

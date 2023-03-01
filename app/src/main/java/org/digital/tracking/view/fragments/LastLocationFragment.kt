@@ -185,7 +185,6 @@ class LastLocationFragment : ReportsBaseFragment() {
     private fun getList(lastLocationsReport: ArrayList<LastLocationReport>): List<LastLocationCsvModel> {
         val list = ArrayList<LastLocationCsvModel>()
         lastLocationsReport.forEachIndexed { index, it ->
-            Timber.d("Report: Current index : $index")
             val vehicleNumber = VehicleRepository.getVehicleNumber(it.imeiNumber)
             val dateTime = getReadableDateAndTime(it.date, it.time)
 //            val address = binding.root.context.getCompleteAddressString(it.lat, it.long)

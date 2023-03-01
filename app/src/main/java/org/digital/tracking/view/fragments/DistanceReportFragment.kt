@@ -227,7 +227,7 @@ class DistanceReportFragment : ReportsBaseFragment() {
                     it.endPoint.longitude
                 )
             }
-            list.add(DistanceReportCsvModel(point, vehicleNumber, dateTime, address, latitude, longitude))
+            list.add(DistanceReportCsvModel(it.imeiNumber ?: "", point, vehicleNumber, dateTime, address, latitude, longitude))
         }
         return list
     }
