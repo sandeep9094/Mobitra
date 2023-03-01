@@ -9,8 +9,10 @@ import android.widget.EditText
 import android.widget.ListView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.mobitra.tracking.ReportsQuery
 import dagger.hilt.android.AndroidEntryPoint
 import org.digital.tracking.R
@@ -18,6 +20,9 @@ import org.digital.tracking.adapter.NewDistanceReportAdapter
 import org.digital.tracking.databinding.FragmentDistanceReportBinding
 import org.digital.tracking.model.ApiResult
 import org.digital.tracking.model.CustomDistanceReport
+import org.digital.tracking.model.LastLocationReport
+import org.digital.tracking.model.csv.DistanceReportCsvModel
+import org.digital.tracking.model.csv.LastLocationCsvModel
 import org.digital.tracking.repository.VehicleRepository
 import org.digital.tracking.utils.*
 import org.digital.tracking.viewModel.ReportsViewModel
@@ -26,6 +31,7 @@ import timber.log.Timber
 @AndroidEntryPoint
 class DistanceReportFragment : ReportsBaseFragment() {
 
+    private val customDistanceReport = ArrayList<CustomDistanceReport>()
     private lateinit var binding: FragmentDistanceReportBinding
     private val viewModel by activityViewModels<ReportsViewModel>()
 
@@ -40,6 +46,7 @@ class DistanceReportFragment : ReportsBaseFragment() {
             vehicleListDialog()
         }
 
+        initExportReport()
         setupObserver()
         showSnackBar(binding.root, "Select vehicle from filters")
     }
@@ -99,7 +106,7 @@ class DistanceReportFragment : ReportsBaseFragment() {
     }
 
     private fun initReport(list: List<ReportsQuery.Report?>) {
-        val customDistanceReport = ArrayList<CustomDistanceReport>()
+        customDistanceReport.clear()
         list.forEach {
             customDistanceReport.add(CustomDistanceReport(it?.IMEINumber, it?.vehicleNum, true, it?.startPoint, null))
             customDistanceReport.add(CustomDistanceReport(it?.IMEINumber, it?.vehicleNum, false, null, it?.endPoint))
@@ -159,6 +166,70 @@ class DistanceReportFragment : ReportsBaseFragment() {
     private fun vehicleSelected(selectedVehicleImei: String, fromDate: String, toDate: String) {
         viewModel.getReport(selectedVehicleImei, fromDate, toDate)
         viewModel.getTotalDistanceReport(selectedVehicleImei, fromDate, toDate)
+    }
+
+    private fun initExportReport() {
+        binding.exportReportIcon.setOnClickListener {
+            if (customDistanceReport.isEmpty()) {
+                showToast(getString(R.string.error_message_reports_are_empty))
+                return@setOnClickListener
+            }
+            viewLifecycleOwner.lifecycleScope.executeAsyncTask(onPreExecute = {
+                showToast("Preparing Report to export")
+            }, doInBackground = {
+                val response = getExportList(customDistanceReport)
+                return@executeAsyncTask response
+            }, onPostExecute = {
+                val gsonArray = Gson().toJson(it)
+                val imeiNumber = customDistanceReport.first().imeiNumber ?: ""
+                val reportName = "${getString(R.string.title_distance_report)}_${imeiNumber}".replace(" ", "_")
+                exportReports(gsonArray, reportName)
+            })
+        }
+    }
+
+    private fun getExportList(reportList: ArrayList<CustomDistanceReport>): List<DistanceReportCsvModel> {
+        val list = ArrayList<DistanceReportCsvModel>()
+        reportList.forEachIndexed { index, it ->
+            Timber.d("Report: Current index : $index")
+            var point = ""
+            var dateTime = ""
+            var address = ""
+            var latitude: Double? = null
+            var longitude: Double? = null
+            val vehicleNumber = VehicleRepository.getVehicleNumber(it.imeiNumber ?: "")
+            if (it.startPoint != null) {
+                //Show Start Point Info
+                point = "Start Point"
+                dateTime = if (it.startPoint.currentDate.isNullOrEmpty()) {
+                    ""
+                } else {
+                    getReadableDateAndTime(it.startPoint.currentDate, it.startPoint.currentTime)
+                }
+                latitude = it.startPoint.latitude
+                longitude = it.startPoint.longitude
+                address = binding.root.context.getCompleteAddressString(
+                    it.startPoint.latitude,
+                    it.startPoint.longitude
+                )
+            } else if (it.endPoint != null) {
+                //Show End Point Info
+                point = "End Point"
+                dateTime = if (it.endPoint.currentDate.isNullOrEmpty()) {
+                    ""
+                } else {
+                    getReadableDateAndTime(it.endPoint.currentDate, it.endPoint.currentTime)
+                }
+                latitude = it.endPoint.latitude
+                longitude = it.endPoint.longitude
+                address = binding.root.context.getCompleteAddressString(
+                    it.endPoint.latitude,
+                    it.endPoint.longitude
+                )
+            }
+            list.add(DistanceReportCsvModel(point, vehicleNumber, dateTime, address, latitude, longitude))
+        }
+        return list
     }
 
 }

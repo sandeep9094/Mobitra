@@ -71,15 +71,6 @@ class LastLocationFragment : ReportsBaseFragment() {
                 val reportName = "${getString(R.string.title_last_location_report)}_${lastLocationSignEntry.imeiNumber}".replace(" ", "_")
                 exportReports(gsonArray, reportName)
             })
-//            viewLifecycleOwner.lifecycleScope.async {
-//                Timber.d("startCoroutine----------------------")
-//                val responsee = getList(lastLocationsReport)
-//                Timber.d("endCoroutine----------------------")
-//                val gsonArray = Gson().toJson(responsee)
-//                val lastLocationSignEntry = lastLocationsReport.first()
-//                val reportName = "${getString(R.string.title_last_location_report)}_${lastLocationSignEntry.imeiNumber}".replace(" ", "_")
-//                exportReports(gsonArray, reportName)
-//            }
         }
         binding.errorMessage.makeVisible()
         showSnackBar(binding.root, "Select vehicle from filters")
@@ -190,9 +181,8 @@ class LastLocationFragment : ReportsBaseFragment() {
         binding.lastLocationReportRecyclerView.makeGone()
     }
 
+
     private fun getList(lastLocationsReport: ArrayList<LastLocationReport>): List<LastLocationCsvModel> {
-        Timber.d("Report: list size---------: ${lastLocationsReport.size}")
-        val totalProgress = 782
         val list = ArrayList<LastLocationCsvModel>()
         lastLocationsReport.forEachIndexed { index, it ->
             Timber.d("Report: Current index : $index")
@@ -201,7 +191,6 @@ class LastLocationFragment : ReportsBaseFragment() {
 //            val address = binding.root.context.getCompleteAddressString(it.lat, it.long)
             list.add(LastLocationCsvModel(it.imeiNumber, vehicleNumber, dateTime,  it.lat, it.long))
         }
-        Timber.d("Report: finished processing")
         return list
     }
 

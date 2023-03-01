@@ -152,7 +152,7 @@ class LiveLocationActivity : BaseActivity(), OnMapReadyCallback {
             setupVehicleInfo(newLocation)
             val vehicleDeviceInfo = UserCacheManager.getDeviceFromImei(newLocation.tags?.IMEINumber ?: "")
             val deviceType = vehicleDeviceInfo?.deviceType ?: ""
-            Timber.d("LiveLocation: deviceType: ${deviceType}, imei: ${vehicleDeviceInfo?.imei}")
+            Timber.d("LiveLocation: deviceType: ${deviceType}, imei: ${vehicleDeviceInfo?.imei}, deviceType: $deviceType")
             if (lastLatitude == null || lastLongitude == null) {
                 lastLatitude = newLocation.latitude
                 lastLongitude = newLocation.longitude
