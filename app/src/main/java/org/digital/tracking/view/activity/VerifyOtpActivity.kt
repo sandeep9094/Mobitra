@@ -17,7 +17,7 @@ import org.digital.tracking.viewModel.ForgotPasswordViewModel
 @AndroidEntryPoint
 class VerifyOtpActivity : BaseActivity(), View.OnClickListener {
 
-    private var emailId = ""
+    private var username = ""
     private lateinit var binding: ActivityVerifyOtpBinding
     private val viewModel by viewModels<ForgotPasswordViewModel>()
 
@@ -27,7 +27,7 @@ class VerifyOtpActivity : BaseActivity(), View.OnClickListener {
         setContentView(binding.root)
         initToolbar(binding.root, getString(R.string.one_time_password))
 
-        emailId = intent.getStringExtra(Constants.INTENT_KEY_EMAIL) ?: ""
+        username = intent.getStringExtra(Constants.INTENT_KEY_EMAIL) ?: ""
 
         binding.verifyOtpButton.setOnClickListener(this)
 
@@ -44,7 +44,7 @@ class VerifyOtpActivity : BaseActivity(), View.OnClickListener {
                     return
                 }
                 binding.otpEditText.hideKeyboard(this)
-                viewModel.verifyOtp(emailId, otp)
+                viewModel.verifyOtp(username, otp)
             }
 
         }
@@ -73,7 +73,7 @@ class VerifyOtpActivity : BaseActivity(), View.OnClickListener {
 
     private fun openChangePasswordScreen() {
         val intent = Intent(this, ChangePasswordActivity::class.java)
-        intent.putExtra(Constants.INTENT_KEY_EMAIL, emailId)
+        intent.putExtra(Constants.INTENT_KEY_EMAIL, username)
         navigateToActivity(intent)
     }
 

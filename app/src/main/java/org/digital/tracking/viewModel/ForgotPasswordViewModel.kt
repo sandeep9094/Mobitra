@@ -2,12 +2,8 @@ package org.digital.tracking.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.google.android.gms.common.api.Api
 import com.google.gson.JsonObject
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.digital.tracking.R
 import org.digital.tracking.api.ApiService
 import org.digital.tracking.di.ResourceProvider
@@ -30,10 +26,10 @@ class ForgotPasswordViewModel @Inject constructor(
     val forgotPasswordApiResult: MutableLiveData<ApiResult<Boolean>> = MutableLiveData()
     val changePasswordApiResponse: MutableLiveData<ApiResult<Boolean>> = MutableLiveData()
 
-    fun forgotPassword(emailId: String) {
+    fun forgotPassword(userName: String) {
         forgotPasswordApiResult.value = ApiResult.Loading
         val payload = JsonObject()
-        payload.addProperty("email", emailId)
+        payload.addProperty("username", userName)
         val call = apiService.generatePasswordOtp(payload)
         call.enqueue(object : Callback<PasswordGenerateOtpResponse> {
             override fun onResponse(call: Call<PasswordGenerateOtpResponse>, response: Response<PasswordGenerateOtpResponse>) {
@@ -61,10 +57,10 @@ class ForgotPasswordViewModel @Inject constructor(
         })
     }
 
-    fun verifyOtp(emailId: String, otp: String) {
+    fun verifyOtp(username: String, otp: String) {
         verifyOtpApiResponse.value = ApiResult.Loading
         val payload = JsonObject()
-        payload.addProperty("email", emailId)
+        payload.addProperty("username", username)
         payload.addProperty("otp", otp)
         val call = apiService.verifyPasswordOtp(payload)
         call.enqueue(object : Callback<VerifyOtpResponse> {
@@ -92,10 +88,10 @@ class ForgotPasswordViewModel @Inject constructor(
         })
     }
 
-    fun changePassword(emailId: String, newPassword: String) {
+    fun changePassword(username: String, newPassword: String) {
         changePasswordApiResponse.value = ApiResult.Loading
         val payload = JsonObject()
-        payload.addProperty("email", emailId)
+        payload.addProperty("username", username)
         payload.addProperty("password", newPassword)
         val call = apiService.changePassword(payload)
         call.enqueue(object : Callback<ChangePasswordResponse> {

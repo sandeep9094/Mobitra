@@ -9,8 +9,10 @@ import android.widget.EditText
 import android.widget.ListView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.mobitra.tracking.ReportsQuery
 import dagger.hilt.android.AndroidEntryPoint
 import org.digital.tracking.R
@@ -19,6 +21,8 @@ import org.digital.tracking.databinding.FragmentHaltReportBinding
 import org.digital.tracking.model.ApiResult
 import org.digital.tracking.model.HaltReport
 import org.digital.tracking.model.OverSpeedReport
+import org.digital.tracking.model.csv.HaltReportCsvModel
+import org.digital.tracking.model.csv.OverSpeedReportCsvModel
 import org.digital.tracking.repository.VehicleRepository
 import org.digital.tracking.utils.*
 import org.digital.tracking.viewModel.ReportsViewModel
@@ -27,6 +31,7 @@ import timber.log.Timber
 @AndroidEntryPoint
 class HaltReportFragment : ReportsBaseFragment() {
 
+    var haltReport: ArrayList<HaltReport> = ArrayList()
     private var reportFromDate: String = ""
     private var reportToDate: String = ""
     private lateinit var binding: FragmentHaltReportBinding
@@ -43,6 +48,7 @@ class HaltReportFragment : ReportsBaseFragment() {
             vehicleListDialog()
         }
 
+        initExportReport()
         setupObserver()
         showSnackBar(binding.root, "Select vehicle from filters")
 
@@ -76,7 +82,7 @@ class HaltReportFragment : ReportsBaseFragment() {
 
 
     private fun initReport(list: List<ReportsQuery.Report?>) {
-        val haltReport: ArrayList<HaltReport> = ArrayList()
+        haltReport = ArrayList()
         list.forEach { report ->
             val haltReportMapFrequency = report?.haltReport?.groupingBy { it?.currentDate }?.eachCount()
             report?.haltReport?.forEach { it ->
@@ -159,6 +165,41 @@ class HaltReportFragment : ReportsBaseFragment() {
 
     private fun vehicleSelected(selectedVehicleImei: String, fromDate: String, toDate: String) {
         viewModel.getHaltReport(selectedVehicleImei, fromDate, toDate)
+    }
+
+
+    private fun initExportReport() {
+        binding.exportReportIcon.setOnClickListener {
+            if (haltReport.isEmpty()) {
+                showToast(getString(R.string.error_message_reports_are_empty))
+                return@setOnClickListener
+            }
+            viewLifecycleOwner.lifecycleScope.executeAsyncTask(onPreExecute = {
+                showToast("Preparing Report to export")
+            }, doInBackground = {
+                val response = getExportList(haltReport)
+                return@executeAsyncTask response
+            }, onPostExecute = {
+                val gsonArray = Gson().toJson(it)
+                val imeiNumber = haltReport.first().imeiNumber ?: ""
+                val reportName = "${getString(R.string.title_halt_report)}_${imeiNumber}".replace(" ", "_")
+                exportReports(gsonArray, reportName)
+            })
+        }
+    }
+
+    private fun getExportList(reportList: ArrayList<HaltReport>): List<HaltReportCsvModel> {
+        val list = ArrayList<HaltReportCsvModel>()
+        reportList.forEachIndexed { index, it ->
+            val vehicleNumber = VehicleRepository.getVehicleNumber(it.imeiNumber ?: "")
+            val fromDate = it.fromDate.getReadableDateFromReportFilters()
+            val toDate = it.toDate.getReadableDateFromReportFilters()
+            val totalHalts = it.halts ?: 0
+            val address = context.getCompleteAddressString(it.latitude, it.longitude)
+
+            list.add(HaltReportCsvModel(it.imeiNumber ?: "", vehicleNumber, fromDate, toDate, address, it.latitude, it.longitude, totalHalts))
+        }
+        return list
     }
 
 }
