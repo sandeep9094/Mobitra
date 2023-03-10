@@ -32,7 +32,7 @@ android {
         minSdk = 21
         targetSdk = 31
         versionCode = 12
-        versionName = "1.0.13"
+        versionName = "1.0.15"
         setProperty("archivesBaseName", "Mobitra_v${versionName}")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
